@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:go_router/go_router.dart';
 import 'package:lead_adminpanelone/Admin/Keyword/KeyWordController.dart';
 import 'package:lead_adminpanelone/Resources/Colors.dart';
 import 'package:lead_adminpanelone/Resources/IconStrings.dart';
@@ -24,6 +25,19 @@ class KeywordScreen extends StatelessWidget {
     final bool isTablet = screenWidth >= 600 && screenWidth < 1000;
     final bool isMobile = screenWidth < 600;
 
+    // Scale function
+    double scale(double mobile, double tablet, double web) {
+      return isMobile ? mobile : isTablet ? tablet : web;
+    }
+
+    // Font sizes
+    final double titleFontSize = scale(18, 20, 22);
+    final double subtitleFontSize = scale(12, 14, 15);
+    final double labelFontSize = scale(12, 13, 14);
+    final double inputFontSize = scale(12, 13, 14);
+    final double buttonFontSize = scale(13, 14, 15);
+    final double smallTextSize = scale(10, 11, 12);
+
     return Scaffold(
       backgroundColor: AppColors.backgroundScreenColor,
       body: SafeArea(
@@ -42,33 +56,30 @@ class KeywordScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    /// LEFT SIDE: Title & Subtitle
+                    /// LEFT SIDE
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             TextStrings.keywordTitle,
-                            style: textTheme.headlineMedium?.copyWith(
-                              fontSize: scaleFor(context, 22, 20, 18),
-                              color: AppColors.textColors,
-                              fontWeight: FontWeight.w600,
+                            style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                              fontSize: titleFontSize,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           SizedBox(height: scaleFor(context, 4, 4, 3)),
                           Text(
                             TextStrings.keywordSubtitle,
-                            style: textTheme.titleSmall?.copyWith(
-                              fontSize: scaleFor(context, 13, 12, 11.5),
-                              height: 1.4,
-                              color: AppColors.textColorOfDropdowns
+                            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                              fontSize: subtitleFontSize,
                             ),
                           ),
                         ],
                       ),
                     ),
 
-                    ///  Add Button
+                    /// ADD BUTTON
                     isMobile || isTablet
                         ? Container(
                       height: scaleFor(context, 38, 36, 34),
@@ -83,7 +94,7 @@ class KeywordScreen extends StatelessWidget {
                           color: AppColors.textColors,
                           size: scaleFor(context, 20, 18, 17),
                         ),
-                        onPressed: () {},
+                        onPressed: () => context.go('/addKeywords'),
                       ),
                     )
                         : ElevatedButton.icon(
@@ -106,10 +117,10 @@ class KeywordScreen extends StatelessWidget {
                         "Add Keyword",
                         style: textTheme.bodyMedium?.copyWith(
                           color: Colors.white,
-                          fontSize: scaleFor(context, 14, 13, 12),
+                          fontSize: buttonFontSize,
                         ),
                       ),
-                      onPressed: () {},
+                      onPressed: () => context.go('/addKeywords'),
                     ),
                   ],
                 ),
@@ -136,13 +147,13 @@ class KeywordScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      /// Title
+                      /// Table Title
                       Padding(
                         padding: EdgeInsets.only(bottom: scaleFor(context, 10, 8, 6)),
                         child: Text(
                           TextStrings.keywordContainerTitle,
                           style: textTheme.headlineSmall?.copyWith(
-                            fontSize: scaleFor(context, 13, 12, 11.5),
+                            fontSize: labelFontSize,
                             fontWeight: FontWeight.w600,
                             color: Colors.black87,
                           ),
@@ -163,29 +174,38 @@ class KeywordScreen extends StatelessWidget {
                           children: [
                             Expanded(
                               flex: 2,
-                              child: Text("SN",
-                                  style: TextStyle(
-                                      color: AppColors.textColors,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: scaleFor(context, 12, 11, 10.5))),
+                              child: Text(
+                                "SN",
+                                style: TextStyle(
+                                  color: AppColors.textColors,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: labelFontSize,
+                                ),
+                              ),
                             ),
                             Expanded(
                               flex: 6,
-                              child: Text('Keyword Category',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: AppColors.textColors,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: scaleFor(context, 12, 11, 10.5))),
+                              child: Text(
+                                'Keyword Category',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: AppColors.textColors,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: labelFontSize,
+                                ),
+                              ),
                             ),
                             Expanded(
                               flex: 2,
-                              child: Text("Actions",
-                                  textAlign: TextAlign.right,
-                                  style: TextStyle(
-                                      color: AppColors.textColors,
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: scaleFor(context, 12, 11, 10.5))),
+                              child: Text(
+                                "Actions",
+                                textAlign: TextAlign.right,
+                                style: TextStyle(
+                                  color: AppColors.textColors,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: labelFontSize,
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -193,6 +213,7 @@ class KeywordScreen extends StatelessWidget {
 
                       SizedBox(height: scaleFor(context, 8, 8, 6)),
 
+                      /// DATA ROWS
                       Obx(() {
                         return Column(
                           children: controller.keywordCategories.map((item) {
@@ -217,7 +238,7 @@ class KeywordScreen extends StatelessWidget {
                                     child: Text(
                                       item['Sn'] ?? '',
                                       style: TextStyle(
-                                        fontSize: scaleFor(context, 10, 9, 8.5),
+                                        fontSize: smallTextSize,
                                         fontWeight: FontWeight.bold,
                                         color: AppColors.textColors,
                                       ),
@@ -229,7 +250,7 @@ class KeywordScreen extends StatelessWidget {
                                       item['category'] ?? '',
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                        fontSize: scaleFor(context, 10, 9, 8.5),
+                                        fontSize: smallTextSize,
                                         fontWeight: FontWeight.bold,
                                         color: AppColors.textColors,
                                       ),
@@ -270,7 +291,7 @@ class KeywordScreen extends StatelessWidget {
 
               SizedBox(height: scaleFor(context, 20, 18, 14)),
 
-              /// Pagination
+              /// PAGINATION
               Obx(() {
                 final currentPage = controller.currentPage.value;
 
@@ -279,15 +300,14 @@ class KeywordScreen extends StatelessWidget {
                     Text(
                       "1–05 of 10 items",
                       style: TextStyle(
-                        fontSize: scaleFor(context, 10.5, 10, 9),
+                        fontSize: smallTextSize,
                         fontWeight: FontWeight.w600,
                         color: AppColors.textColors,
                       ),
                     ),
-
                     SizedBox(width: scaleFor(context, 6, 5.5, 5)),
 
-                    /// ---- Previous Button
+                    /// Previous
                     Container(
                       height: scaleFor(context, 24, 22, 20),
                       width: scaleFor(context, 24, 22, 20),
@@ -295,28 +315,19 @@ class KeywordScreen extends StatelessWidget {
                         color: AppColors.primaryColor.withOpacity(0.15),
                         borderRadius: BorderRadius.circular(4),
                         border: Border.all(color: AppColors.primaryColor),
-                        boxShadow: [
-                          BoxShadow(
-                            color: AppColors.primaryColor.withOpacity(0.15),
-                            blurRadius: 3,
-                            offset: const Offset(0, 1),
-                          ),
-                        ],
                       ),
                       child: IconButton(
                         padding: EdgeInsets.zero,
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.keyboard_double_arrow_left,
-                          textDirection: TextDirection.rtl,
                           color: AppColors.textColors,
+                          size: smallTextSize,
                         ),
-                        iconSize: scaleFor(context, 10.5, 10, 9.5),
                         onPressed: controller.previousPage,
                       ),
                     ),
 
-
-                    /// ---- Pages
+                    /// Page Numbers
                     for (int i = 1; i <= 5; i++)
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -348,14 +359,14 @@ class KeywordScreen extends StatelessWidget {
                                     ? Colors.white
                                     : AppColors.textColors,
                                 fontWeight: FontWeight.w600,
-                                fontSize: scaleFor(context, 9.8, 9.4, 9),
+                                fontSize: smallTextSize,
                               ),
                             ),
                           ),
                         ),
                       ),
 
-                    /// ---- Next Button
+                    /// Next
                     Container(
                       height: scaleFor(context, 24, 22, 20),
                       width: scaleFor(context, 24, 22, 20),
@@ -365,11 +376,11 @@ class KeywordScreen extends StatelessWidget {
                       ),
                       child: IconButton(
                         padding: EdgeInsets.zero,
-                        icon: const Icon(
+                        icon: Icon(
                           Icons.keyboard_double_arrow_right,
                           color: Colors.white,
+                          size: smallTextSize,
                         ),
-                        iconSize: scaleFor(context, 10.5, 10, 9.5),
                         onPressed: controller.nextPage,
                       ),
                     ),

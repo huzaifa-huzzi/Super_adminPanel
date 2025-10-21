@@ -13,8 +13,9 @@ class IconsString {
   static const String  menuIcon = 'assets/icons/menu_icon.png';
 
 
-/// Keyword Icon
+   /// Keyword Icon
   static const String  deleteIcon = 'assets/icons/Delete Icon.png';
+  static const String  personIcon = 'assets/icons/person.png';
 
 
 

@@ -155,18 +155,6 @@ class SideBarScreen extends StatelessWidget {
                 },
               ),
             ),
-
-            /// Collapse/Expand button
-            Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: IconButton(
-                icon: Icon(
-                  isCollapsed ? Icons.chevron_right : Icons.chevron_left,
-                  color: AppColors.primaryColor,
-                ),
-                onPressed: controller.toggleCollapse,
-              ),
-            ),
           ],
         ),
       );
@@ -644,8 +632,7 @@ class SideBarScreen extends StatelessWidget {
 
 
   /// ---------------- Mobile AppBar ---------------- ///
-  PreferredSizeWidget buildMobileAppBar(
-      BuildContext context, double screenWidth) {
+  PreferredSizeWidget buildMobileAppBar(BuildContext context, double screenWidth) {
     return PreferredSize(
       preferredSize: const Size.fromHeight(56),
       child: Obx(

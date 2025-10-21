@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class KeywordController extends GetxController {
+
+  /// KeywordScreen
   RxList<Map<String, String>> keywordCategories = <Map<String, String>>[].obs;
   RxInt currentPage = 1.obs;
   RxInt totalPages = 5.obs;
@@ -40,4 +43,20 @@ class KeywordController extends GetxController {
       update();
     }
   }
+
+
+  /// Add KeywordScreen
+  final keywordCategoryNameController = TextEditingController();
+  final keywordCategoryNameNode = FocusNode();
+  var loading = false.obs;
+
+  @override
+  void onClose() {
+  keywordCategoryNameController.dispose();
+  keywordCategoryNameNode.dispose();
+    super.onClose();
+  }
+
+
+
 }
