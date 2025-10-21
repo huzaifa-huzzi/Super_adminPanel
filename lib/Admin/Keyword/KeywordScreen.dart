@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lead_adminpanelone/Admin/Keyword/KeyWordController.dart';
-import 'package:lead_adminpanelone/Resources/Colors.dart';
-import 'package:lead_adminpanelone/Resources/IconStrings.dart';
-import 'package:lead_adminpanelone/Resources/String.dart';
-import 'package:lead_adminpanelone/Resources/textTheme.dart';
+import 'package:super_adminPanel/Admin/Keyword/KeyWordController.dart';
+import 'package:super_adminPanel/Resources/Colors.dart';
+import 'package:super_adminPanel/Resources/IconStrings.dart';
+import 'package:super_adminPanel/Resources/String.dart';
+import 'package:super_adminPanel/Resources/textTheme.dart';
 
 class KeywordScreen extends StatelessWidget {
   const KeywordScreen({super.key});

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lead_adminpanelone/Admin/Sidebar/SidebarController.dart' show Sidebarcontroller;
-import 'package:lead_adminpanelone/Resources/Colors.dart';
-import 'package:lead_adminpanelone/Resources/IconStrings.dart' show IconsString;
+import 'package:super_adminPanel/Admin/Sidebar/SidebarController.dart';
+import 'package:super_adminPanel/Resources/Colors.dart';
+import 'package:super_adminPanel/Resources/IconStrings.dart';
 
 
 class SideBarScreen extends StatelessWidget {

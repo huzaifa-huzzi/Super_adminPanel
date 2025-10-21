@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:lead_adminpanelone/Resources/Colors.dart';
-import 'package:lead_adminpanelone/Resources/textTheme.dart';
+import 'package:super_adminPanel/Resources/Colors.dart';
+import 'package:super_adminPanel/Resources/textTheme.dart' show TTextTheme;
 
 class TAppTheme {
   TAppTheme._();

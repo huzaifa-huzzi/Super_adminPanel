@@ -1,11 +1,10 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:lead_adminpanelone/Admin/Employee/EmployeeScreen.dart';
-import 'package:lead_adminpanelone/Admin/CityScreen/CityScreen.dart';
-import 'package:lead_adminpanelone/Admin/CountryScreen/CountryScreen.dart';
-import 'package:lead_adminpanelone/Admin/Keyword/KeywordScreen.dart';
-import 'package:lead_adminpanelone/Admin/StateScreen/StateScreen.dart';
-
+import 'package:super_adminPanel/Admin/CityScreen/CityScreen.dart';
+import 'package:super_adminPanel/Admin/CountryScreen/CountryScreen.dart';
+import 'package:super_adminPanel/Admin/Employee/EmployeeScreen.dart';
+import 'package:super_adminPanel/Admin/Keyword/KeywordScreen.dart';
+import 'package:super_adminPanel/Admin/StateScreen/StateScreen.dart';
 
 class Sidebarcontroller extends GetxController {
   var selectedIndex = 0.obs;
@@ -14,6 +13,7 @@ class Sidebarcontroller extends GetxController {
   var showSearch = false.obs;
   var isHovered = false;
   var isSearchActive = false.obs;
+  var dataFilterExpanded = false.obs;
 
   final List<Widget> screens = [
     EmployeeScreen(),
@@ -24,6 +24,8 @@ class Sidebarcontroller extends GetxController {
   ];
 
   void toggleCollapse() => isCollapsed.value = !isCollapsed.value;
+  void toggleDataFilter() => dataFilterExpanded.value = !dataFilterExpanded.value;
+
   void changeScreen(int index) {
     isProfileSelected.value = false;
     selectedIndex.value = index;
@@ -31,12 +33,7 @@ class Sidebarcontroller extends GetxController {
 
   void setScreenByRoute(String route) {
     final r = route.toLowerCase();
-      /// This code is placed for the Profile (In case if the requirements changes)
-   // if (r.contains('profile')) {
-     // selectedIndex.value = -1;
-    //  isProfileSelected.value = true;
-    //  return;
-   // }
+
     if (r.contains('employee')) {
       selectedIndex.value = 0;
     } else if (r.contains('keyword')) {
@@ -45,16 +42,13 @@ class Sidebarcontroller extends GetxController {
       selectedIndex.value = 2;
     } else if (r.contains('state')) {
       selectedIndex.value = 3;
-    }else if (r.contains('city')) {
+    } else if (r.contains('city')) {
       selectedIndex.value = 4;
-    }
-
-    else {
+    } else {
       selectedIndex.value = 0;
     }
     isProfileSelected.value = false;
   }
-
 
   String get currentScreenName {
     if (selectedIndex.value == -1) return 'Profile';

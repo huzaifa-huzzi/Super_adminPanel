@@ -1,7 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lead_adminpanelone/Resources/Colors.dart';
+import 'package:super_adminPanel/Resources/Colors.dart';
 
 class TTextTheme {
   TTextTheme._();
@@ -9,9 +8,14 @@ class TTextTheme {
 
   /// For light theme
   static TextTheme lightTextTheme = TextTheme(
-    headlineLarge:  TextStyle().copyWith(fontSize: 24, fontWeight: FontWeight.w400, fontFamily: GoogleFonts.poppins().fontFamily, color: AppColors.appBarColor,),//the buttons of the body
+    headlineLarge:  TextStyle().copyWith(
+      fontSize: 24,
+      fontWeight: FontWeight.w400,
+      fontFamily: GoogleFonts.poppins().fontFamily,
+      color: AppColors.appBarColor,
+    ),// also for login headings and the buttons of the body
     headlineMedium:  TextStyle().copyWith(fontSize: 20,fontWeight: FontWeight.bold,fontFamily: GoogleFonts.poppins().fontFamily,color: AppColors.appBarColor) , // for the button of login
-    headlineSmall: const TextStyle().copyWith(fontSize: 15,fontWeight: FontWeight.w400,fontFamily: GoogleFonts.poppins().fontFamily,color: AppColors.textColors), // for the upper names of the TextFormField
+    headlineSmall: const TextStyle().copyWith(fontSize: 15,fontWeight: FontWeight.w400,fontFamily: GoogleFonts.poppins().fontFamily,color: AppColors.textColors), // for the upper names of the textformfields
 
     titleLarge:  const TextStyle().copyWith(fontSize:32,fontWeight: FontWeight.w600,fontFamily: GoogleFonts.poppins().fontFamily ,color: AppColors.textColors), // for the main heading of the body
     titleMedium: const TextStyle().copyWith(fontSize:17,fontWeight: FontWeight.w400,fontFamily: GoogleFonts.poppins().fontFamily ,color: AppColors.redColor), // for the cancel buttons in the body
@@ -22,14 +26,15 @@ class TTextTheme {
     bodySmall: const TextStyle().copyWith(fontSize:20,fontWeight: FontWeight.w400,fontFamily: GoogleFonts.poppins().fontFamily,color: AppColors.textColors ),  // for the small headings in the body and also for the dropdown of the profile
 
     labelLarge: const TextStyle().copyWith(fontSize:24,fontWeight: FontWeight.bold,fontFamily: GoogleFonts.poppins().fontFamily, color: AppColors.textColors ), // for the sidebar headings
-    labelMedium: const TextStyle().copyWith(fontSize: 15,fontWeight: FontWeight.w400,fontFamily: GoogleFonts.poppins().fontFamily,color: AppColors.appBarColor), // for the LoginScreens
-    labelSmall: const TextStyle().copyWith(fontSize:12,fontWeight: FontWeight.w400,fontFamily: GoogleFonts.poppins().fontFamily, color: AppColors.TextformFieldsTextColor ), // for the TextFormField colors
+    labelMedium: const TextStyle().copyWith(fontSize: 15,fontWeight: FontWeight.w400,fontFamily: GoogleFonts.poppins().fontFamily,color: AppColors.appBarColor), // for the loginscreens
+    labelSmall: const TextStyle().copyWith(fontSize:12,fontWeight: FontWeight.w400,fontFamily: GoogleFonts.poppins().fontFamily, color: AppColors.TextformFieldsTextColor ), // for the textformfieldstext colors
 
   );
 
 
   /// For dark theme
   static TextTheme darkTextTheme = TextTheme();
+
 
 
 }
