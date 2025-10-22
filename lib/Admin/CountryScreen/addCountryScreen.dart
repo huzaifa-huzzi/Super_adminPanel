@@ -65,7 +65,7 @@ class AddCountryScreen extends StatelessWidget {
           children: [
             /// Heading
             Text(
-              TextStrings.keywordTitle,
+              TextStrings.countryTitle,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontSize: titleFontSize,
                 fontWeight: FontWeight.bold,
