@@ -8,11 +8,15 @@ class TextStrings {
   static const String keywordContainerTitle = "List of Keyword Category";
   static const String addKeyWordSubTitle = "Add keyword category details through this input section.";
 
-  /// Country Screens
+  /// Country Screens Texts
   static const String countryTitle = "Country";
   static const String countrySubTitle = "This helps in filtering and analyzing location-based information effectively.";
   static const String countryContainerTitle = "List of Country";
   static const String addCountryTitleSubtitle = "Add Country details through this input section.";
 
+  /// State Screen Texts
+  static const String stateTitle = "State";
+  static const String stateSubtitle = "Enter or choose the state name to refine regional data organization. It supports accurate filtering and better location-specific insights.";
+  static const String stateContainerTitle = "List of State";
 
 }

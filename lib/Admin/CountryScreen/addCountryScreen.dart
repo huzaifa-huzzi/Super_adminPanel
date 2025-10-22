@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:super_adminPanel/Admin/Keyword/KeyWordController.dart' show KeywordController;
+import 'package:super_adminPanel/Admin/CountryScreen/CountryController.dart';
 import 'package:super_adminPanel/Resources/Colors.dart';
 import 'package:super_adminPanel/Resources/IconStrings.dart';
 import 'package:super_adminPanel/Resources/String.dart';
@@ -9,7 +9,7 @@ import 'package:super_adminPanel/Resources/String.dart';
 class AddCountryScreen extends StatelessWidget {
   AddCountryScreen({super.key});
 
-  final controller = Get.put(KeywordController());
+  final controller = Get.put(CountryController());
 
   @override
   Widget build(BuildContext context) {
