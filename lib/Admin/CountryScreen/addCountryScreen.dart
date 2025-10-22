@@ -187,7 +187,7 @@ class AddCountryScreen extends StatelessWidget {
                                 horizontal: scale(20, 24, 28)),
                           ),
                           onPressed: () {
-                            context.go('/keyword');
+                            context.go('/country');
                           },
                           child: Text(
                             "Add",
