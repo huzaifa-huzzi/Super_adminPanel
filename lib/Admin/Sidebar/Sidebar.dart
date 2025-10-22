@@ -414,8 +414,6 @@ class SideBarScreen extends StatelessWidget {
   }
 
 
-
-
   /// ---------------- Tablet AppBar ---------------- ///
   PreferredSizeWidget buildTabletAppBar(BuildContext context, double screenWidth) {
     return PreferredSize(

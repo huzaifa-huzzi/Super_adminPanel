@@ -8,7 +8,11 @@ class TextStrings {
   static const String keywordContainerTitle = "List of Keyword Category";
   static const String addKeyWordSubTitle = "Add keyword category details through this input section.";
 
-
+  /// Country Screens
+  static const String countryTitle = "Country";
+  static const String countrySubTitle = "This helps in filtering and analyzing location-based information effectively.";
+  static const String countryContainerTitle = "List of Country";
+  static const String addCountryTitleSubtitle = "Add Country details through this input section.";
 
 
 }

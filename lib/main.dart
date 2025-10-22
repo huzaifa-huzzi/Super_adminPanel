@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:super_adminPanel/Admin/CityScreen/CityScreen.dart';
 import 'package:super_adminPanel/Admin/CountryScreen/CountryScreen.dart';
+import 'package:super_adminPanel/Admin/CountryScreen/addCountryScreen.dart';
 import 'package:super_adminPanel/Admin/Employee/EmployeeScreen.dart';
 import 'package:super_adminPanel/Admin/Keyword/AddKeyWordScreen.dart';
 import 'package:super_adminPanel/Admin/Keyword/KeywordScreen.dart';
@@ -56,6 +57,10 @@ class MyApp extends StatelessWidget {
             GoRoute(
               path: '/addKeywords',
               builder: (context, state) => AddKeywordScreen(),
+            ),
+            GoRoute(
+              path: '/addCountry',
+              builder: (context, state) => AddCountryScreen(),
             ),
           ],
         ),
