@@ -20,4 +20,10 @@ class TextStrings {
   static const String stateContainerTitle = "List of State";
   static const String addStateSubtitle = "Add state details through this input section.";
 
+  /// City Screen
+  static const String cityTitle = "City";
+  static const String citySubtitle = "Enhances precision in location-based filtering and reporting.";
+  static const String cityContainerTitle = "List of City";
+  static const String addCitySubtitle = "Add City details through this input section";
+
 }

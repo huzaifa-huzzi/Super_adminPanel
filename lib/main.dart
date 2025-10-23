@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:super_adminPanel/Admin/CityScreen/CityScreen.dart';
+import 'package:super_adminPanel/Admin/CityScreen/addCityScreen.dart';
 import 'package:super_adminPanel/Admin/CountryScreen/CountryScreen.dart';
 import 'package:super_adminPanel/Admin/CountryScreen/addCountryScreen.dart';
 import 'package:super_adminPanel/Admin/Employee/EmployeeScreen.dart';
@@ -66,6 +67,10 @@ class MyApp extends StatelessWidget {
             GoRoute(
               path: '/addState',
               builder: (context, state) => AddStateScreen(),
+            ),
+            GoRoute(
+              path: '/addCity',
+              builder: (context, state) => AddCityScreen(),
             ),
           ],
         ),
