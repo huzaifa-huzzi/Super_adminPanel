@@ -10,6 +10,7 @@ import 'package:super_adminPanel/Admin/Keyword/KeywordScreen.dart';
 import 'package:super_adminPanel/Admin/Sidebar/Sidebar.dart';
 import 'package:super_adminPanel/Admin/Sidebar/SidebarController.dart';
 import 'package:super_adminPanel/Admin/StateScreen/StateScreen.dart';
+import 'package:super_adminPanel/Admin/StateScreen/addStateScreen.dart';
 import 'package:super_adminPanel/Resources/Theme.dart';
 import 'package:url_strategy/url_strategy.dart';
 
@@ -61,6 +62,10 @@ class MyApp extends StatelessWidget {
             GoRoute(
               path: '/addCountry',
               builder: (context, state) => AddCountryScreen(),
+            ),
+            GoRoute(
+              path: '/addState',
+              builder: (context, state) => AddStateScreen(),
             ),
           ],
         ),

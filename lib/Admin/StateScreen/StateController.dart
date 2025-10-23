@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 
 class StateController extends GetxController {
 
-  /// country Screen
   RxList<Map<String, String>> keywordCategories = <Map<String, String>>[].obs;
   RxInt currentPage = 1.obs;
   RxInt totalPages = 5.obs;
@@ -45,15 +44,20 @@ class StateController extends GetxController {
   }
 
 
-  /// Add country names
+  /// Add state names
   final stateController = TextEditingController();
   final stateNode = FocusNode();
+  final countryController = TextEditingController();
+  final countryNode = FocusNode();
+
   var loading = false.obs;
 
   @override
   void onClose() {
     stateController.dispose();
     stateNode.dispose();
+    countryController.dispose();
+    countryNode.dispose();
     super.onClose();
   }
 

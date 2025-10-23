@@ -18,5 +18,6 @@ class TextStrings {
   static const String stateTitle = "State";
   static const String stateSubtitle = "Enter or choose the state name to refine regional data organization. It supports accurate filtering and better location-specific insights.";
   static const String stateContainerTitle = "List of State";
+  static const String addStateSubtitle = "Add state details through this input section.";
 
 }

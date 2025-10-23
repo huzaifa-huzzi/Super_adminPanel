@@ -36,7 +36,6 @@ class StateScreen extends StatelessWidget {
     final double titleFontSize = scale(18, 20, 22);
     final double subtitleFontSize = scale(12, 14, 15);
     final double labelFontSize = scale(12, 13, 14);
-    final double inputFontSize = scale(12, 13, 14);
     final double buttonFontSize = scale(13, 14, 15);
     final double smallTextSize = scale(10, 11, 12);
 
@@ -96,7 +95,7 @@ class StateScreen extends StatelessWidget {
                           color: AppColors.textColors,
                           size: scaleFor(context, 20, 18, 17),
                         ),
-                        onPressed: () => context.go('/addCountry'),
+                        onPressed: () => context.go('/addState'),
                       ),
                     )
                         : ElevatedButton.icon(
@@ -122,7 +121,7 @@ class StateScreen extends StatelessWidget {
                           fontSize: buttonFontSize,
                         ),
                       ),
-                      onPressed: () => context.go('/addCountry'),
+                      onPressed: () => context.go('/addState'),
                     ),
                   ],
                 ),

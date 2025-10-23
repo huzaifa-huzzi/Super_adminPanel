@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
-import 'package:super_adminPanel/Admin/CountryScreen/CountryController.dart';
+import 'package:super_adminPanel/Admin/StateScreen/StateController.dart';
 import 'package:super_adminPanel/Resources/Colors.dart';
 import 'package:super_adminPanel/Resources/IconStrings.dart';
 import 'package:super_adminPanel/Resources/String.dart';
 
-class AddCountryScreen extends StatelessWidget {
-  AddCountryScreen({super.key});
+class AddStateScreen extends StatelessWidget {
+  AddStateScreen({super.key});
 
-  final controller = Get.put(CountryController());
+  final controller = Get.put(StateController());
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class AddCountryScreen extends StatelessWidget {
           children: [
             /// Heading
             Text(
-              TextStrings.countryTitle,
+              TextStrings.stateTitle,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontSize: titleFontSize,
                 fontWeight: FontWeight.bold,
@@ -73,7 +73,7 @@ class AddCountryScreen extends StatelessWidget {
             ),
             SizedBox(height: scale(6, 8, 10)),
             Text(
-              TextStrings.addCountryTitleSubtitle,
+              TextStrings.addStateSubtitle,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                 fontSize: subtitleFontSize,
               ),
@@ -102,6 +102,7 @@ class AddCountryScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        /// country textfield
                         Row(
                           children: [
                             Image.asset(IconsString.countryIcon,
@@ -117,14 +118,49 @@ class AddCountryScreen extends StatelessWidget {
                         ),
                         SizedBox(height: scale(8, 10, 12)),
                         TextFormField(
-                          controller: controller.keywordCategoryNameController,
-                          focusNode: controller.keywordCategoryNameNode,
+                          controller: controller.countryController,
+                          focusNode: controller.countryNode,
                           keyboardType: TextInputType.url,
                           cursorColor: Colors.black,
                           style: TextStyle(
                               color: Colors.black, fontSize: inputFontSize),
                           decoration: InputDecoration(
                             hintText: "Enter the Country Name",
+                            hintStyle: TextStyle(
+                                color: AppColors.captionsColor,
+                                fontSize: inputFontSize),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              borderSide: BorderSide(
+                                  color: AppColors.captionsColor, width: 1),
+                            ),
+                          ),
+                        ),
+                        /// state  textfield
+                        SizedBox(height: scale(10, 12, 18)),
+                        Row(
+                          children: [
+                            Image.asset(IconsString.stateIcon,
+                                width: scale(16, 18, 20),
+                                height: scale(16, 18, 20)),
+                            SizedBox(width: scale(6, 8, 10)),
+                            Text("Name of State",
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(fontSize: labelFontSize)),
+                          ],
+                        ),
+                        SizedBox(height: scale(8, 10, 12)),
+                        TextFormField(
+                          controller: controller.stateController,
+                          focusNode: controller.stateNode,
+                          keyboardType: TextInputType.url,
+                          cursorColor: Colors.black,
+                          style: TextStyle(
+                              color: Colors.black, fontSize: inputFontSize),
+                          decoration: InputDecoration(
+                            hintText: "Enter the State Name",
                             hintStyle: TextStyle(
                                 color: AppColors.captionsColor,
                                 fontSize: inputFontSize),
@@ -187,7 +223,7 @@ class AddCountryScreen extends StatelessWidget {
                                 horizontal: scale(20, 24, 28)),
                           ),
                           onPressed: () {
-                            context.go('/country');
+                            context.go('/state');
                           },
                           child: Text(
                             "Add",
