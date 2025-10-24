@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:super_adminPanel/Admin/CityScreen/CityController.dart';
-import 'package:super_adminPanel/Admin/StateScreen/StateController.dart';
 import 'package:super_adminPanel/Resources/Colors.dart';
 import 'package:super_adminPanel/Resources/IconStrings.dart';
 import 'package:super_adminPanel/Resources/String.dart';
