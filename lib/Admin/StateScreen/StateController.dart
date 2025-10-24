@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:super_adminPanel/Resources/Colors.dart';
 
 class StateController extends GetxController {
 
@@ -16,10 +17,6 @@ class StateController extends GetxController {
       {'Sn': '05', 'category': 'Canada','states' : 'Liguaria'},
       {'Sn': '06', 'category': 'United States','states' : 'Le Marche'},
     ]);
-  }
-
-  void deleteKeyword(int index) {
-    keywordCategories.removeAt(index);
   }
 
   void nextPage() {
@@ -63,4 +60,118 @@ class StateController extends GetxController {
 
 
 
+}
+
+double scaleForWidth(BuildContext context, double size) {
+  final width = MediaQuery.of(context).size.width;
+  if (width >= 1600) return size;
+  if (width >= 1200) return size * 0.9;
+  if (width >= 800) return size * 0.8;
+  if (width >= 600) return size * 0.75;
+  return size * 0.7;
+}
+
+void showDeleteConfirmationDialog(BuildContext context) {
+  final screenWidth = MediaQuery.of(context).size.width;
+  final bool isMobile = screenWidth < 600;
+
+  double pad(double value) => scaleForWidth(context, value);
+  double font(double size) => scaleForWidth(context, size);
+
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (context) {
+      return Center(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            maxWidth: isMobile ? 280 : 340,
+          ),
+          child: Material(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(pad(12)),
+            child: Padding(
+              padding: EdgeInsets.all(pad(20)),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    "Are You Sure?",
+                    style: TextStyle(
+                      fontSize: font(20),
+                      fontWeight: FontWeight.bold,
+                      color: AppColors.redColor,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: pad(25)),
+
+                  /// Buttons
+                  Flex(
+                    direction: isMobile ? Axis.vertical : Axis.horizontal,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      /// Cancel Button
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(pad(8)),
+                            side: const BorderSide(color: Colors.black12),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            vertical: pad(12),
+                            horizontal: pad(30),
+                          ),
+                        ),
+                        onPressed: () => Navigator.of(context).pop(),
+                        child: Text(
+                          "Cancel",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: font(14),
+                          ),
+                        ),
+                      ),
+
+                      SizedBox(
+                        width: isMobile ? 0 : pad(20),
+                        height: isMobile ? pad(12) : 0,
+                      ),
+
+                      /// Delete Button
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.backgroundOfLogoutColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(pad(8)),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            vertical: pad(12),
+                            horizontal: pad(30),
+                          ),
+                        ),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          "Delete",
+                          style: TextStyle(
+                            color: Colors.red,
+                            fontWeight: FontWeight.bold,
+                            fontSize: font(14),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    },
+  );
 }

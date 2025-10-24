@@ -270,7 +270,9 @@ class CountryScreen extends StatelessWidget {
                                     child: Align(
                                       alignment: Alignment.centerRight,
                                       child: InkWell(
-                                        onTap: () => controller.deleteKeyword(index),
+                                        onTap: () {
+                                          showDeleteConfirmationDialog(context);
+                                        },
                                         child: Container(
                                           height: scaleFor(context, 18, 17, 16),
                                           width: scaleFor(context, 18, 17, 16),
