@@ -16,6 +16,7 @@ class Sidebarcontroller extends GetxController {
   var isHovered = false;
   var selectedPath = ''.obs;
 
+
   final List<Widget> screens = [
     EmployeeScreen(),
     KeywordScreen(),
