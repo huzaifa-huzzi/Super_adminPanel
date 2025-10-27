@@ -6,28 +6,59 @@ import 'package:super_adminPanel/Resources/Colors.dart';
 import 'package:super_adminPanel/Resources/IconStrings.dart';
 
 
+
+
 class SideBarScreen extends StatelessWidget {
   final Widget child;
+
   SideBarScreen({super.key, required this.child});
 
-  final controller = Get.put(Sidebarcontroller());
+  final Sidebarcontroller controller = Get.find<Sidebarcontroller>();
 
   final List<Map<String, dynamic>> baseMenuItems = [
-    {'icon': IconsString.employeeIcon, 'label': 'Employees', 'path': '/employee'},
-    {'icon': IconsString.categoryIcon, 'label': 'Keyword', 'path': '/keyword'},
-    {'icon': IconsString.countryIcon, 'label': 'Country', 'path': '/country'},
-    {'icon': IconsString.stateIcon, 'label': 'State', 'path': '/state'},
-    {'icon': IconsString.cityIcon, 'label': 'City', 'path': '/city'},
+    {
+      'icon': IconsString.employeeIcon,
+      'label': 'Employees',
+      'path': '/employee'
+    },
+    {
+      'icon': IconsString.categoryIcon,
+      'label': 'Data Filter',
+      'children': [
+        {
+          'icon': IconsString.categoryIcon,
+          'label': 'Keyword',
+          'path': '/keyword'
+        },
+        {
+          'icon': IconsString.countryIcon,
+          'label': 'Country',
+          'path': '/country'
+        },
+        {'icon': IconsString.stateIcon, 'label': 'State', 'path': '/state'},
+        {'icon': IconsString.cityIcon, 'label': 'City', 'path': '/city'},
+      ],
+    },
   ];
 
   @override
   Widget build(BuildContext context) {
-    final String currentPath = GoRouterState.of(context).uri.toString();
+    // Get current route
+    final String currentPath = GoRouter
+        .of(context)
+        .routerDelegate
+        .currentConfiguration
+        .uri
+        .toString();
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       controller.setScreenByRoute(currentPath);
     });
 
-    final double screenWidth = MediaQuery.of(context).size.width;
+    final double screenWidth = MediaQuery
+        .of(context)
+        .size
+        .width;
     final bool isWeb = screenWidth >= 1024;
     final bool isTablet = screenWidth >= 600 && screenWidth < 1024;
 
@@ -39,7 +70,7 @@ class SideBarScreen extends StatelessWidget {
             Expanded(
               child: Row(
                 children: [
-                  buildSidebar(false, context, screenWidth, showProfile: false),
+                  buildSidebar(context, isDrawer: false),
                   Expanded(child: child),
                 ],
               ),
@@ -52,7 +83,7 @@ class SideBarScreen extends StatelessWidget {
         appBar: buildTabletAppBar(context, screenWidth),
         body: Row(
           children: [
-            buildSidebar(false, context, screenWidth, showProfile: false),
+            buildSidebar(context, isDrawer: false),
             Expanded(child: child),
           ],
         ),
@@ -60,9 +91,9 @@ class SideBarScreen extends StatelessWidget {
     } else {
       // Mobile
       return Scaffold(
-        appBar: buildMobileAppBar(context,screenWidth),
+        appBar: buildMobileAppBar(context, screenWidth),
         drawer: Drawer(
-          child: buildSidebar(true, context, screenWidth * 0.5),
+          child: buildSidebar(context, isDrawer: true),
         ),
         body: child,
       );
@@ -70,89 +101,160 @@ class SideBarScreen extends StatelessWidget {
   }
 
   /// ---------------- Sidebar ---------------- ///
-  Widget buildSidebar(bool isDrawer, BuildContext context, double screenWidth,
-      {bool showProfile = false}) {
-    final items = List<Map<String, dynamic>>.from(baseMenuItems);
-
+  Widget buildSidebar(BuildContext context, {bool isDrawer = false}) {
     return Obx(() {
       final bool isCollapsed = controller.isCollapsed.value;
-      final double targetWidth = isCollapsed ? 65 : 200;
+      final double targetWidth = isCollapsed ? 110 : 160;
 
       return AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         width: targetWidth,
         color: AppColors.appBarColor,
-        curve: Curves.easeInOut,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 30),
-
             Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                itemCount: items.length,
-                itemBuilder: (context, index) {
-                  final item = items[index];
-                  final bool isSelected =
-                      GoRouterState.of(context).uri.toString() == item['path'];
+              child: ListView(
+                children: baseMenuItems.map((item) {
+                  final hasChildren = item['children'] != null;
+                  final bool isParentSelected =
+                  controller.isParentSelected(item['label']);
+                  final bool isExpanded = controller.dataFilterExpanded.value &&
+                      item['label'].toString().toLowerCase() == 'data filter';
 
-                  return InkWell(
-                    onTap: () {
-                      context.go(item['path']);
-                      controller.selectedIndex.value = index;
-                      if (isDrawer) Navigator.pop(context);
-                    },
-                    child: Container(
-                      margin:
-                      const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 12, horizontal: 8),
-                      decoration: BoxDecoration(
-                        gradient: isSelected
-                            ? const LinearGradient(
-                          begin: Alignment.centerLeft,
-                          end: Alignment.centerRight,
-                          colors: [
-                            Color(0xFFF8F8F9),
-                            Color(0xFF0085FF),
-                          ],
-                          stops: [0.01, 1.0],
-                        )
-                            : null,
-                        borderRadius: BorderRadius.circular(6),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: isCollapsed
-                            ? MainAxisAlignment.center
-                            : MainAxisAlignment.start,
-                        children: [
-                          Image.asset(
-                            item['icon'],
-                            width: 22,
-                            height: 22,
-                            color: isSelected ? AppColors.primaryColor : AppColors.textColors,
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          if (hasChildren) {
+                            controller.toggleDataFilter();
+                          } else {
+                            context.go(item['path']);
+                            controller.setScreenByRoute(item['path']);
+                          }
+                        },
+                        child: Container(
+                          margin: const EdgeInsets.symmetric(
+                              vertical: 2, horizontal: 4),
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 12, horizontal: 8),
+                          decoration: BoxDecoration(
+                            gradient: isParentSelected
+                                ? const LinearGradient(
+                              begin: Alignment.centerLeft,
+                              end: Alignment.centerRight,
+                              colors: [
+                                Color(0xFFF8F8F9),
+                                Color(0xFF0085FF),
+                              ],
+                              stops: [0.01, 1.0],
+                            )
+                                : null,
+                            borderRadius: BorderRadius.circular(6),
                           ),
-                          if (!isCollapsed) ...[
-                            const SizedBox(width: 8),
-                            Flexible(
-                              child: Text(
-                                item['label'],
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: isSelected
-                                      ? Colors.white
-                                      : AppColors.textColors,
-                                ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Image.asset(
+                                item['icon'],
+                                width: 22,
+                                height: 22,
+                                color: isParentSelected
+                                    ? AppColors.primaryColor
+                                    : AppColors.textColors,
                               ),
-                            ),
-                          ],
-                        ],
+                              if (!isCollapsed) ...[
+                                const SizedBox(width: 8),
+                                Expanded(
+                                  child: Text(
+                                    item['label'],
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: isParentSelected
+                                          ? AppColors.primaryColor
+                                          : AppColors.textColors,
+                                    ),
+                                  ),
+                                ),
+                              ],
+
+                              if (hasChildren)
+                                Padding(
+                                  padding: EdgeInsets.only(
+                                    left: isCollapsed ? 4 : 0,
+                                  ),
+                                  child: Icon(
+                                    isExpanded
+                                        ? Icons.keyboard_arrow_down
+                                        : Icons.keyboard_arrow_right,
+                                    color: AppColors.textColors,
+                                  ),
+                                ),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
+
+                      if (hasChildren && isExpanded && !isCollapsed)
+                        Padding(
+                          padding: const EdgeInsets.only(left: 35.0),
+                          child: Column(
+                            children:
+                            (item['children'] as List).map<Widget>((subItem) {
+                              final bool isSelected =
+                                  controller.selectedPath.value ==
+                                      subItem['path'];
+                              return InkWell(
+                                onTap: () {
+                                  context.go(subItem['path']);
+                                  controller.setScreenByRoute(subItem['path']);
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.symmetric(
+                                      vertical: 3, horizontal: 2),
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 8, horizontal: 6),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: isSelected
+                                          ? AppColors.primaryColor
+                                          : Colors.transparent,
+                                      width: 1.2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Image.asset(
+                                        subItem['icon'],
+                                        width: 18,
+                                        height: 18,
+                                        color: isSelected
+                                            ? AppColors.primaryColor
+                                            : AppColors.textColors,
+                                      ),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        subItem['label'],
+                                        style: TextStyle(
+                                          fontSize: 13,
+                                          color: isSelected
+                                              ? AppColors.primaryColor
+                                              : AppColors.textColors,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+                    ],
                   );
-                },
+                }).toList(),
               ),
             ),
           ],
@@ -164,7 +266,6 @@ class SideBarScreen extends StatelessWidget {
 
 
   /// ---------------- Web AppBar ---------------- ///
-
   PreferredSizeWidget buildWebAppBar(BuildContext context, double screenWidth) {
     return PreferredSize(
       preferredSize: const Size.fromHeight(73),
@@ -223,7 +324,7 @@ class SideBarScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 4),
                   child: Container(
                     width: screenWidth * 0.16,
-                    height: 32,
+                    height: 30,
                     padding: const EdgeInsets.symmetric(horizontal: 8),
                     decoration: BoxDecoration(
                       color: AppColors.backgroundOfSearchBar,
@@ -233,7 +334,6 @@ class SideBarScreen extends StatelessWidget {
                         width: 0.5,
                       ),
                     ),
-
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -242,27 +342,17 @@ class SideBarScreen extends StatelessWidget {
                           size: 18,
                           color: AppColors.captionsColor,
                         ),
-                        const SizedBox(width: 6),
-
-                        Expanded(
-                          child: Align(
-                            alignment: Alignment.center,
-                            child: TextField(
-                              style: const TextStyle(
+                        const SizedBox(width: 8),
+                        const Expanded(
+                          child: TextField(
+                            style: TextStyle(fontSize: 14, color: Colors.black),
+                            decoration: InputDecoration(
+                              contentPadding: const EdgeInsets.symmetric(vertical: 12.5),
+                              border: InputBorder.none,
+                              hintText: "Search...",
+                              hintStyle: TextStyle(
                                 fontSize: 14,
-                                color: Colors.black,
-                                height: 1.0,
-                              ),
-                              textAlignVertical: TextAlignVertical.center,
-                              decoration: const InputDecoration(
-                                isDense: true,
-                                border: InputBorder.none,
-                                hintText: "Search...",
-                                hintStyle: TextStyle(
-                                  fontSize: 14,
-                                  color: AppColors.captionsColor,
-                                  height: 1.0,
-                                ),
+                                color: AppColors.captionsColor,
                               ),
                             ),
                           ),
@@ -271,7 +361,6 @@ class SideBarScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-
 
 
                 SizedBox(width: screenWidth * 0.006),
@@ -630,7 +719,8 @@ class SideBarScreen extends StatelessWidget {
 
 
   /// ---------------- Mobile AppBar ---------------- ///
-  PreferredSizeWidget buildMobileAppBar(BuildContext context, double screenWidth) {
+  PreferredSizeWidget buildMobileAppBar(
+      BuildContext context, double screenWidth) {
     return PreferredSize(
       preferredSize: const Size.fromHeight(56),
       child: Obx(
@@ -742,7 +832,7 @@ class SideBarScreen extends StatelessWidget {
                           child: Image.asset(
                             IconsString.menuIcon,
                             width: 16,
-                            height: 18,
+                            height: 16,
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -757,6 +847,7 @@ class SideBarScreen extends StatelessWidget {
       ),
     );
   }
+
 
 
 }
