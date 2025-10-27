@@ -7,7 +7,6 @@ import 'package:super_adminPanel/Resources/IconStrings.dart';
 
 
 
-
 class SideBarScreen extends StatelessWidget {
   final Widget child;
 
