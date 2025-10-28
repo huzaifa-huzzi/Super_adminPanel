@@ -173,7 +173,7 @@ class SideBarScreen extends StatelessWidget {
                                     style: TextStyle(
                                       fontSize: 14,
                                       color: isParentSelected
-                                          ? AppColors.primaryColor
+                                          ? Colors.white
                                           : AppColors.textColors,
                                     ),
                                   ),
