@@ -5,7 +5,7 @@ class IconsString {
 
   /// Sidebar Icons
   static const String  employeeIcon = 'assets/icons/users.png';
-  static const String  valuesIcon = 'assets/icons/Value.png';
+  static const String  dataFilterIcon = 'assets/icons/Value.png';
   static const String  cityIcon = 'assets/icons/city-icon.png';
   static const String  countryIcon = 'assets/icons/country-icon.png';
   static const String  categoryIcon = 'assets/icons/category-icon.png';

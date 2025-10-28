@@ -21,7 +21,7 @@ class SideBarScreen extends StatelessWidget {
       'path': '/employee'
     },
     {
-      'icon': IconsString.categoryIcon,
+      'icon': IconsString.dataFilterIcon,
       'label': 'Data Filter',
       'children': [
         {
@@ -42,7 +42,7 @@ class SideBarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get current route
+    // Getting current route
     final String currentPath = GoRouter
         .of(context)
         .routerDelegate
@@ -103,10 +103,10 @@ class SideBarScreen extends StatelessWidget {
   Widget buildSidebar(BuildContext context, {bool isDrawer = false}) {
     return Obx(() {
       final bool isCollapsed = controller.isCollapsed.value;
-      final double targetWidth = isCollapsed ? 110 : 160;
+      final double targetWidth = isCollapsed ? 125 : 200;
 
       return AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
+        duration: const Duration(milliseconds: 100),
         width: targetWidth,
         color: AppColors.appBarColor,
         child: Column(
@@ -125,6 +125,7 @@ class SideBarScreen extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      //  Parents Items
                       InkWell(
                         onTap: () {
                           if (hasChildren) {
@@ -135,8 +136,8 @@ class SideBarScreen extends StatelessWidget {
                           }
                         },
                         child: Container(
-                          margin: const EdgeInsets.symmetric(
-                              vertical: 2, horizontal: 4),
+                          margin:
+                          const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
                           padding: const EdgeInsets.symmetric(
                               vertical: 12, horizontal: 8),
                           decoration: BoxDecoration(
@@ -178,7 +179,6 @@ class SideBarScreen extends StatelessWidget {
                                   ),
                                 ),
                               ],
-
                               if (hasChildren)
                                 Padding(
                                   padding: EdgeInsets.only(
@@ -196,9 +196,12 @@ class SideBarScreen extends StatelessWidget {
                         ),
                       ),
 
-                      if (hasChildren && isExpanded && !isCollapsed)
+                      // Expanding and collapsing
+                      if (hasChildren && isExpanded)
                         Padding(
-                          padding: const EdgeInsets.only(left: 35.0),
+                          padding: EdgeInsets.only(
+                            left: isCollapsed ? 30 : 35,
+                          ),
                           child: Column(
                             children:
                             (item['children'] as List).map<Widget>((subItem) {
@@ -225,7 +228,11 @@ class SideBarScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: Row(
+                                    mainAxisAlignment: isCollapsed
+                                        ? MainAxisAlignment.center
+                                        : MainAxisAlignment.start,
                                     children: [
+
                                       Image.asset(
                                         subItem['icon'],
                                         width: 18,
@@ -234,16 +241,22 @@ class SideBarScreen extends StatelessWidget {
                                             ? AppColors.primaryColor
                                             : AppColors.textColors,
                                       ),
-                                      const SizedBox(width: 8),
-                                      Text(
-                                        subItem['label'],
-                                        style: TextStyle(
-                                          fontSize: 13,
-                                          color: isSelected
-                                              ? AppColors.primaryColor
-                                              : AppColors.textColors,
+
+
+                                      if (!isCollapsed) ...[
+                                        const SizedBox(width: 8),
+                                        Expanded(
+                                          child: Text(
+                                            subItem['label'],
+                                            style: TextStyle(
+                                              fontSize: 13,
+                                              color: isSelected
+                                                  ? AppColors.primaryColor
+                                                  : AppColors.textColors,
+                                            ),
+                                          ),
                                         ),
-                                      ),
+                                      ],
                                     ],
                                   ),
                                 ),

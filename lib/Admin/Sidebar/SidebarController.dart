@@ -35,14 +35,11 @@ class Sidebarcontroller extends GetxController {
   ];
 
 
+
   void toggleCollapse() {
     isCollapsed.value = !isCollapsed.value;
-
-
-    if (isCollapsed.value) {
-      dataFilterExpanded.value = false;
-    }
   }
+
 
 
   void toggleDataFilter() {
