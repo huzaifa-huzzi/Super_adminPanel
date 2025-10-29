@@ -17,6 +17,9 @@ class IconsString {
   static const String  deleteIcon = 'assets/icons/Delete Icon.png';
   static const String  personIcon = 'assets/icons/person.png';
 
+  /// Employee Icons
+  static const String  editIcon = 'assets/icons/edit_fill.png';
+
 
 
 

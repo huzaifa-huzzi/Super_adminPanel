@@ -24,6 +24,8 @@ class AppColors {
   static const Color textColorOfDropdowns =   Color(0xFF7D7C7F);
   static const Color textColorOfApply =   Color(0xFF0185FF);
   static const Color radioTileColors =   Color(0xFFBFBFBF);
+  static const Color backgroundActiveColor =    Color(0xffDBFCE7);
+  static const Color activeTextColor =    Color(0xff166B30);
 
 
 
