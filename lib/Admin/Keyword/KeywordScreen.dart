@@ -293,100 +293,86 @@ class KeywordScreen extends StatelessWidget {
 
               SizedBox(height: scaleFor(context, 20, 18, 14)),
 
-              /// PAGINATION
+              /// Pagination
               Obx(() {
                 final currentPage = controller.currentPage.value;
-
-                return Row(
-                  children: [
-                    Text(
-                      "1–05 of 10 items",
-                      style: TextStyle(
-                        fontSize: smallTextSize,
-                        fontWeight: FontWeight.w600,
-                        color: AppColors.textColors,
-                      ),
-                    ),
-                    SizedBox(width: scaleFor(context, 6, 5.5, 5)),
-
-                    /// Previous
-                    Container(
-                      height: scaleFor(context, 24, 22, 20),
-                      width: scaleFor(context, 24, 22, 20),
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryColor.withOpacity(0.15),
-                        borderRadius: BorderRadius.circular(4),
-                        border: Border.all(color: AppColors.primaryColor),
-                      ),
-                      child: IconButton(
-                        padding: EdgeInsets.zero,
-                        icon: Icon(
-                          Icons.keyboard_double_arrow_left,
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      Text(
+                        "1–05 of 10 items",
+                        style: TextStyle(
+                          fontSize: smallTextSize,
+                          fontWeight: FontWeight.w600,
                           color: AppColors.textColors,
-                          size: smallTextSize,
                         ),
-                        onPressed: controller.previousPage,
                       ),
-                    ),
-
-                    /// Page Numbers
-                    for (int i = 1; i <= 5; i++)
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: scaleFor(context, 2.5, 2, 1.5),
-                        ),
-                        child: InkWell(
+                      SizedBox(width: scaleFor(context, 6, 5.5, 5)),
+                      Container(
+                        height: 24,
+                        width: 24,
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryColor.withOpacity(0.15),
                           borderRadius: BorderRadius.circular(4),
-                          onTap: () => controller.goToPage(i),
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: scaleFor(context, 6, 5.5, 5),
-                              vertical: scaleFor(context, 3.2, 3, 2.6),
-                            ),
-                            decoration: BoxDecoration(
-                              color: currentPage == i
-                                  ? AppColors.primaryColor
-                                  : Colors.white,
-                              borderRadius: BorderRadius.circular(4),
-                              border: Border.all(
+                          border: Border.all(color: AppColors.primaryColor),
+                        ),
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          icon: Icon(Icons.keyboard_double_arrow_left,
+                              color: AppColors.textColors, size: smallTextSize),
+                          onPressed: controller.previousPage,
+                        ),
+                      ),
+                      for (int i = 1; i <= 5; i++)
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 2.5),
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(4),
+                            onTap: () => controller.goToPage(i),
+                            child: Container(
+                              padding:
+                              const EdgeInsets.symmetric(horizontal: 6, vertical: 3),
+                              decoration: BoxDecoration(
                                 color: currentPage == i
                                     ? AppColors.primaryColor
-                                    : Colors.black12,
+                                    : Colors.white,
+                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(
+                                  color: currentPage == i
+                                      ? AppColors.primaryColor
+                                      : Colors.black12,
+                                ),
                               ),
-                            ),
-                            child: Text(
-                              "$i",
-                              style: TextStyle(
-                                color: currentPage == i
-                                    ? Colors.white
-                                    : AppColors.textColors,
-                                fontWeight: FontWeight.w600,
-                                fontSize: smallTextSize,
+                              child: Text(
+                                "$i",
+                                style: TextStyle(
+                                  color: currentPage == i
+                                      ? Colors.white
+                                      : AppColors.textColors,
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: smallTextSize,
+                                ),
                               ),
                             ),
                           ),
                         ),
-                      ),
-
-                    /// Next
-                    Container(
-                      height: scaleFor(context, 24, 22, 20),
-                      width: scaleFor(context, 24, 22, 20),
-                      decoration: BoxDecoration(
-                        color: AppColors.primaryColor,
-                        borderRadius: BorderRadius.circular(4),
-                      ),
-                      child: IconButton(
-                        padding: EdgeInsets.zero,
-                        icon: Icon(
-                          Icons.keyboard_double_arrow_right,
-                          color: Colors.white,
-                          size: smallTextSize,
+                      Container(
+                        height: 24,
+                        width: 24,
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryColor,
+                          borderRadius: BorderRadius.circular(4),
                         ),
-                        onPressed: controller.nextPage,
+                        child: IconButton(
+                          padding: EdgeInsets.zero,
+                          icon: Icon(Icons.keyboard_double_arrow_right,
+                              color: Colors.white, size: smallTextSize),
+                          onPressed: controller.nextPage,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 );
               }),
             ],

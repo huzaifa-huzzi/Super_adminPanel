@@ -188,7 +188,9 @@ class SideBarScreen extends StatelessWidget {
                                     isExpanded
                                         ? Icons.keyboard_arrow_down
                                         : Icons.keyboard_arrow_right,
-                                    color: AppColors.textColors,
+                                    color: isParentSelected
+                                        ? Colors.white
+                                        : AppColors.textColors,
                                   ),
                                 ),
                             ],
