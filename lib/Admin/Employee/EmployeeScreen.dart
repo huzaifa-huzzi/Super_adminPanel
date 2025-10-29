@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:super_adminPanel/Admin/Employee/EmployeeController.dart';
 import 'package:super_adminPanel/Resources/Colors.dart';
 import 'package:super_adminPanel/Resources/IconStrings.dart';
+import 'package:super_adminPanel/Resources/String.dart';
 import 'package:super_adminPanel/Resources/textTheme.dart';
 
 class EmployeeScreen extends StatelessWidget {
@@ -54,7 +55,7 @@ class EmployeeScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Employees",
+                          TextStrings.employeeTitle,
                           style: Theme.of(context).textTheme.titleLarge?.copyWith(
                             fontSize: titleFontSize,
                             fontWeight: FontWeight.bold,
@@ -62,7 +63,7 @@ class EmployeeScreen extends StatelessWidget {
                         ),
                         SizedBox(height: scaleFor(context, 4, 4, 3)),
                         Text(
-                          "Keep all employee details organized in one place. Easily access, manage, and update staff information anytime.",
+                          TextStrings.employeeSubtitle,
                           style: Theme.of(context).textTheme.titleSmall?.copyWith(
                             fontSize: subtitleFontSize,
                           ),
@@ -126,7 +127,7 @@ class EmployeeScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Employee List",
+                        TextStrings.employeeContainerTitle,
                         style: textTheme.headlineSmall?.copyWith(
                           fontSize: labelFontSize,
                           fontWeight: FontWeight.w600,

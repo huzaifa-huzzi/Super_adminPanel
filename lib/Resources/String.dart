@@ -26,4 +26,9 @@ class TextStrings {
   static const String cityContainerTitle = "List of City";
   static const String addCitySubtitle = "Add City details through this input section";
 
+  /// Employee Screen
+  static const String employeeTitle = "Employee List";
+  static const String employeeSubtitle = "Keep all employee details organized in one place. Easily access, manage, and update staff information anytime.";
+  static const String employeeContainerTitle = "List of Employees";
+
 }
