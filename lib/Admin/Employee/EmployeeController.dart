@@ -8,6 +8,8 @@ class EmployeeController extends GetxController {
   RxInt currentPage = 1.obs;
   RxInt totalPages = 5.obs;
   RxSet<int> visiblePasswords = <int>{}.obs;
+  var isActive = true.obs;
+
 
   EmployeeController() {
     employees.assignAll([

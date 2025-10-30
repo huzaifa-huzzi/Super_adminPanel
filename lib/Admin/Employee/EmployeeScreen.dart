@@ -259,7 +259,7 @@ class EmployeeScreen extends StatelessWidget {
 
                                           InkWell(
                                             onTap: () {
-
+                                              context.go('/editEmployeeInfo');
                                             },
                                             child: Container(
                                               height: scaleFor(context, 22, 21, 20),
