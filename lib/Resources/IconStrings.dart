@@ -19,6 +19,9 @@ class IconsString {
 
   /// Employee Icons
   static const String  editIcon = 'assets/icons/edit_fill.png';
+  static const String  nameIcon = 'assets/icons/name.png';
+  static const String  passwordIcon = 'assets/icons/Password.png';
+  static const String  statusIcon = 'assets/icons/status.png';
 
 
 

@@ -58,6 +58,8 @@ class EmployeeController extends GetxController {
   }
 }
 
+ /// Edit Employee Information
+
 double scaleForWidth(BuildContext context, double size) {
   final width = MediaQuery.of(context).size.width;
   if (width >= 1600) return size;
