@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:super_adminPanel/Resources/Colors.dart';
 import 'package:super_adminPanel/Resources/IconStrings.dart';
+import 'package:super_adminPanel/Resources/String.dart';
 import 'EmployeeController.dart';
 
 class EditEmployeeInfoScreen extends StatelessWidget {
@@ -21,16 +22,41 @@ class EditEmployeeInfoScreen extends StatelessWidget {
       return desktop;
     }
 
-    return Align(
-      alignment: isMobile ? Alignment.center : Alignment.centerLeft,
-      child: SingleChildScrollView(
-        padding: EdgeInsets.symmetric(
-          horizontal: isMobile ? scaleFor(10, 20, 40) : scaleFor(20, 40, 60),
-          vertical: scaleFor(20, 30, 40),
-        ),
-        child: Column(
-          children: [
-            Container(
+    return SingleChildScrollView(
+      padding: EdgeInsets.symmetric(
+        horizontal: isMobile ? scaleFor(10, 20, 40) : scaleFor(20, 40, 60),
+        vertical: scaleFor(10, 15, 20),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ///  HEADER
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                TextStrings.editEmployeeTitle,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                  fontSize: scaleFor(15, 17, 19),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: scaleFor(4, 4, 3)),
+              Text(
+                TextStrings.editEmployeeSubtitle,
+                style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  fontSize: scaleFor(11, 12, 13),
+                ),
+              ),
+            ],
+          ),
+
+          SizedBox(height: scaleFor(14, 18, 20)),
+
+          /// ---------------- MAIN CONTAINER ----------------
+          Align(
+            alignment: isMobile ? Alignment.center : Alignment.topLeft,
+            child: Container(
               alignment: Alignment.centerLeft,
               width: isMobile ? width * 0.95 : (isTablet ? width * 0.7 : width * 0.5),
               decoration: BoxDecoration(
@@ -41,20 +67,12 @@ class EditEmployeeInfoScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  /// ---- Title ----
+                  /// Title
                   Text(
-                    "Edit Employee Information",
+                    TextStrings.editEmployeeContainerTitle,
                     style: Theme.of(context).textTheme.titleLarge?.copyWith(
                       fontSize: scaleFor(15, 17, 19),
                       fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  SizedBox(height: scaleFor(8, 10, 12)),
-                  Text(
-                    "Quickly update employee details to ensure records remain accurate and up to date.",
-                    style: TextStyle(
-                      fontSize: scaleFor(10, 11, 12),
-                      color: AppColors.captionsColor,
                     ),
                   ),
                   SizedBox(height: scaleFor(16, 18, 20)),
@@ -131,8 +149,8 @@ class EditEmployeeInfoScreen extends StatelessWidget {
                 ],
               ),
             ),
-          ],
-        )
+          ),
+        ],
       ),
     );
   }
@@ -165,7 +183,23 @@ class EditEmployeeInfoScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.asset(icon, height: iconSize, width: iconSize),
+
+              Container(
+                height: scaleFor(42, 46, 50),
+                width: scaleFor(42, 46, 50),
+                decoration: BoxDecoration(
+                  color: AppColors.dividerColor,
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Center(
+                  child: Image.asset(
+                    icon,
+                    height: scaleFor(22, 24, 26),
+                    width: scaleFor(22, 24, 26),
+                    fit: BoxFit.contain,
+                  ),
+                ),
+              ),
               SizedBox(width: gap),
               Expanded(
                 child: Text(
@@ -212,7 +246,6 @@ class EditEmployeeInfoScreen extends StatelessWidget {
                   activeTrackColor: AppColors.activeTextColor,
                 ),
               ),
-
             ],
           )
               : Text(
@@ -228,7 +261,22 @@ class EditEmployeeInfoScreen extends StatelessWidget {
           : Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(icon, height: iconSize, width: iconSize),
+          ///  Icon Box
+          Container(
+            height: scaleFor(16, 15, 13),
+            width: scaleFor(16, 15, 13),
+            decoration: BoxDecoration(
+              color: Colors.green,
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: Center(
+              child: Image.asset(
+                icon,
+                height: scaleFor(14, 13, 12),
+                width: scaleFor(14, 13, 12),
+              ),
+            ),
+          ),
           SizedBox(width: gap),
           Text(
             label,
@@ -238,7 +286,6 @@ class EditEmployeeInfoScreen extends StatelessWidget {
             ),
           ),
           const Spacer(),
-
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -266,7 +313,7 @@ class EditEmployeeInfoScreen extends StatelessWidget {
                   activeTrackColor: AppColors.activeTextColor,
                 ),
               )
-        : InkWell(
+                  : InkWell(
                 onTap: onTap,
                 child: Icon(
                   Icons.edit,

@@ -43,7 +43,7 @@ class AddCityScreen extends StatelessWidget {
       screenHeight * 0.065,
     );
 
-    // Container Max Width
+    //  Max Width
     double containerMaxWidth = isMobile
         ? screenWidth * 0.95
         : isTablet
@@ -65,7 +65,7 @@ class AddCityScreen extends StatelessWidget {
           children: [
             /// Heading
             Text(
-              TextStrings.stateTitle,
+              TextStrings.cityTitle,
               style: Theme.of(context).textTheme.titleLarge?.copyWith(
                 fontSize: titleFontSize,
                 fontWeight: FontWeight.bold,
@@ -73,7 +73,7 @@ class AddCityScreen extends StatelessWidget {
             ),
             SizedBox(height: scale(6, 8, 10)),
             Text(
-              TextStrings.addStateSubtitle,
+              TextStrings.addCitySubtitle,
               style: Theme.of(context).textTheme.titleSmall?.copyWith(
                 fontSize: subtitleFontSize,
               ),
