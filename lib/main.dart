@@ -16,6 +16,7 @@ import 'package:super_adminPanel/Admin/StateScreen/addStateScreen.dart';
 import 'package:super_adminPanel/Resources/Theme.dart';
 import 'package:url_strategy/url_strategy.dart';
 
+
 void main() {
   setPathUrlStrategy();
   Get.put(Sidebarcontroller());
