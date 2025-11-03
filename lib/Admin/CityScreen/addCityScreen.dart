@@ -20,7 +20,7 @@ class AddCityScreen extends StatelessWidget {
     final bool isMobile = screenWidth < 600;
     final bool isTablet = screenWidth >= 600 && screenWidth < 1000;
 
-    // Scale
+    // Scale function
     double scale(double mobile, double tablet, double web) {
       return isMobile
           ? mobile
@@ -102,7 +102,7 @@ class AddCityScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        /// country textfield
+                        /// Country TextField
                         Row(
                           children: [
                             Image.asset(IconsString.countryIcon,
@@ -117,26 +117,32 @@ class AddCityScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: scale(8, 10, 12)),
-                        TextFormField(
-                          controller: controller.countryController,
-                          focusNode: controller.countryNode,
-                          keyboardType: TextInputType.url,
-                          cursorColor: Colors.black,
-                          style: TextStyle(
-                              color: Colors.black, fontSize: inputFontSize),
-                          decoration: InputDecoration(
-                            hintText: "Enter the Country Name",
-                            hintStyle: TextStyle(
-                                color: AppColors.captionsColor,
-                                fontSize: inputFontSize),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: BorderSide(
-                                  color: AppColors.captionsColor, width: 1),
+                        SizedBox(
+                          height: scale(34, 36, 38),
+                          child: TextFormField(
+                            controller: controller.countryController,
+                            focusNode: controller.countryNode,
+                            keyboardType: TextInputType.text,
+                            cursorColor: Colors.black,
+                            style: TextStyle(
+                                color: Colors.black, fontSize: inputFontSize),
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: scale(10, 12, 14), vertical: 0),
+                              hintText: "Enter the Country Name",
+                              hintStyle: TextStyle(
+                                  color: AppColors.captionsColor,
+                                  fontSize: inputFontSize),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: BorderSide(
+                                    color: AppColors.captionsColor, width: 1),
+                              ),
                             ),
                           ),
                         ),
-                        /// state  textfield
+
+                        /// State TextField
                         SizedBox(height: scale(10, 12, 18)),
                         Row(
                           children: [
@@ -152,26 +158,32 @@ class AddCityScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: scale(8, 10, 12)),
-                        TextFormField(
-                          controller: controller.stateController,
-                          focusNode: controller.stateNode,
-                          keyboardType: TextInputType.url,
-                          cursorColor: Colors.black,
-                          style: TextStyle(
-                              color: Colors.black, fontSize: inputFontSize),
-                          decoration: InputDecoration(
-                            hintText: "Enter the State Name",
-                            hintStyle: TextStyle(
-                                color: AppColors.captionsColor,
-                                fontSize: inputFontSize),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: BorderSide(
-                                  color: AppColors.captionsColor, width: 1),
+                        SizedBox(
+                          height: scale(34, 36, 38),
+                          child: TextFormField(
+                            controller: controller.stateController,
+                            focusNode: controller.stateNode,
+                            keyboardType: TextInputType.text,
+                            cursorColor: Colors.black,
+                            style: TextStyle(
+                                color: Colors.black, fontSize: inputFontSize),
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: scale(10, 12, 14), vertical: 0),
+                              hintText: "Enter the State Name",
+                              hintStyle: TextStyle(
+                                  color: AppColors.captionsColor,
+                                  fontSize: inputFontSize),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: BorderSide(
+                                    color: AppColors.captionsColor, width: 1),
+                              ),
                             ),
                           ),
                         ),
-                        /// city textfield
+
+                        /// City TextField
                         SizedBox(height: scale(10, 12, 18)),
                         Row(
                           children: [
@@ -179,7 +191,7 @@ class AddCityScreen extends StatelessWidget {
                                 width: scale(16, 18, 20),
                                 height: scale(16, 18, 20)),
                             SizedBox(width: scale(6, 8, 10)),
-                            Text("Name of city",
+                            Text("Name of City",
                                 style: Theme.of(context)
                                     .textTheme
                                     .bodyMedium
@@ -187,22 +199,27 @@ class AddCityScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: scale(8, 10, 12)),
-                        TextFormField(
-                          controller: controller.cityController,
-                          focusNode: controller.cityNode,
-                          keyboardType: TextInputType.url,
-                          cursorColor: Colors.black,
-                          style: TextStyle(
-                              color: Colors.black, fontSize: inputFontSize),
-                          decoration: InputDecoration(
-                            hintText: "Enter the city Name",
-                            hintStyle: TextStyle(
-                                color: AppColors.captionsColor,
-                                fontSize: inputFontSize),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: BorderSide(
-                                  color: AppColors.captionsColor, width: 1),
+                        SizedBox(
+                          height: scale(34, 36, 38),
+                          child: TextFormField(
+                            controller: controller.cityController,
+                            focusNode: controller.cityNode,
+                            keyboardType: TextInputType.text,
+                            cursorColor: Colors.black,
+                            style: TextStyle(
+                                color: Colors.black, fontSize: inputFontSize),
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: scale(10, 12, 14), vertical: 0),
+                              hintText: "Enter the City Name",
+                              hintStyle: TextStyle(
+                                  color: AppColors.captionsColor,
+                                  fontSize: inputFontSize),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: BorderSide(
+                                    color: AppColors.captionsColor, width: 1),
+                              ),
                             ),
                           ),
                         ),
@@ -223,8 +240,7 @@ class AddCityScreen extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.backgroundOfLogoutColor,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  scale(4, 6, 8)),
+                              borderRadius: BorderRadius.circular(scale(4, 6, 8)),
                             ),
                             padding: EdgeInsets.symmetric(
                                 horizontal: scale(20, 24, 28)),
@@ -251,8 +267,7 @@ class AddCityScreen extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primaryColor,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  scale(4, 6, 8)),
+                              borderRadius: BorderRadius.circular(scale(4, 6, 8)),
                             ),
                             padding: EdgeInsets.symmetric(
                                 horizontal: scale(20, 24, 28)),
@@ -283,3 +298,4 @@ class AddCityScreen extends StatelessWidget {
     );
   }
 }
+

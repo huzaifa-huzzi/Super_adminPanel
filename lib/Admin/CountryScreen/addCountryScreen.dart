@@ -102,36 +102,49 @@ class AddCountryScreen extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        /// Country Label
                         Row(
                           children: [
-                            Image.asset(IconsString.countryIcon,
-                                width: scale(16, 18, 20),
-                                height: scale(16, 18, 20)),
+                            Image.asset(
+                              IconsString.countryIcon,
+                              width: scale(16, 18, 20),
+                              height: scale(16, 18, 20),
+                            ),
                             SizedBox(width: scale(6, 8, 10)),
-                            Text("Name of Country",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.copyWith(fontSize: labelFontSize)),
+                            Text(
+                              "Name of Country",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(fontSize: labelFontSize),
+                            ),
                           ],
                         ),
                         SizedBox(height: scale(8, 10, 12)),
-                        TextFormField(
-                          controller: controller.keywordCategoryNameController,
-                          focusNode: controller.keywordCategoryNameNode,
-                          keyboardType: TextInputType.url,
-                          cursorColor: Colors.black,
-                          style: TextStyle(
-                              color: Colors.black, fontSize: inputFontSize),
-                          decoration: InputDecoration(
-                            hintText: "Enter the Country Name",
-                            hintStyle: TextStyle(
-                                color: AppColors.captionsColor,
-                                fontSize: inputFontSize),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: BorderSide(
-                                  color: AppColors.captionsColor, width: 1),
+
+                        /// Compact Country TextField
+                        SizedBox(
+                          height: scale(34, 36, 38),
+                          child: TextFormField(
+                            controller:
+                            controller.keywordCategoryNameController,
+                            focusNode: controller.keywordCategoryNameNode,
+                            keyboardType: TextInputType.text,
+                            cursorColor: Colors.black,
+                            style: TextStyle(
+                                color: Colors.black, fontSize: inputFontSize),
+                            decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: scale(10, 12, 14), vertical: 0),
+                              hintText: "Enter the Country Name",
+                              hintStyle: TextStyle(
+                                  color: AppColors.captionsColor,
+                                  fontSize: inputFontSize),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: BorderSide(
+                                    color: AppColors.captionsColor, width: 1),
+                              ),
                             ),
                           ),
                         ),
@@ -152,8 +165,8 @@ class AddCountryScreen extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.backgroundOfLogoutColor,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  scale(4, 6, 8)),
+                              borderRadius:
+                              BorderRadius.circular(scale(4, 6, 8)),
                             ),
                             padding: EdgeInsets.symmetric(
                                 horizontal: scale(20, 24, 28)),
@@ -180,8 +193,8 @@ class AddCountryScreen extends StatelessWidget {
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColors.primaryColor,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  scale(4, 6, 8)),
+                              borderRadius:
+                              BorderRadius.circular(scale(4, 6, 8)),
                             ),
                             padding: EdgeInsets.symmetric(
                                 horizontal: scale(20, 24, 28)),

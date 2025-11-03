@@ -5,6 +5,7 @@ import 'package:super_adminPanel/Admin/CityScreen/CityScreen.dart';
 import 'package:super_adminPanel/Admin/CityScreen/addCityScreen.dart';
 import 'package:super_adminPanel/Admin/CountryScreen/CountryScreen.dart';
 import 'package:super_adminPanel/Admin/CountryScreen/addCountryScreen.dart';
+import 'package:super_adminPanel/Admin/Employee/AddEmployeeScreen.dart';
 import 'package:super_adminPanel/Admin/Employee/EditEmployeeInfoScreen.dart';
 import 'package:super_adminPanel/Admin/Employee/EmployeeScreen.dart';
 import 'package:super_adminPanel/Admin/Keyword/AddKeyWordScreen.dart';
@@ -77,6 +78,10 @@ class MyApp extends StatelessWidget {
             GoRoute(
               path: '/editEmployeeInfo',
               builder: (context, state) => EditEmployeeInfoScreen(),
+            ),
+            GoRoute(
+              path: '/addEmployee',
+              builder: (context, state) => AddEmployeeScreen(),
             ),
           ],
         ),

@@ -53,7 +53,7 @@ class EditEmployeeInfoScreen extends StatelessWidget {
 
           SizedBox(height: scaleFor(14, 18, 20)),
 
-          /// ---------------- MAIN CONTAINER ----------------
+          ///  Edit Employee CONTAINER
           Align(
             alignment: isMobile ? Alignment.center : Alignment.topLeft,
             child: Container(
@@ -154,8 +154,9 @@ class EditEmployeeInfoScreen extends StatelessWidget {
       ),
     );
   }
+  /// -------------- Extra Widgets ------------- ///
+  /// Main Row Builder
 
-  /// ------------------- Main Row Builder -------------------
   Widget _buildRow(
       BuildContext context,
       bool isMobile,
@@ -180,6 +181,7 @@ class EditEmployeeInfoScreen extends StatelessWidget {
           ? Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+           /// Mobile and Tablets
           Row(
             children: [
               /// Left Icon Box
@@ -215,22 +217,26 @@ class EditEmployeeInfoScreen extends StatelessWidget {
                 InkWell(
                   onTap: onTap,
                   child: Container(
-                    height: scaleFor(30, 32, 34),
-                    width: scaleFor(30, 32, 34),
+                    height: scaleFor(24, 26, 28),
+                    width: scaleFor(24, 26, 28),
                     decoration: BoxDecoration(
                       color: AppColors.dividerColor,
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Icon(
-                      Icons.edit,
-                      size: scaleFor(16, 17, 18),
-                      color: AppColors.textColors.withOpacity(0.7),
+                    child: Center(
+                      child: Image.asset(
+                        IconsString.editIcon,
+                        width: scaleFor(16, 18, 20),
+                        height: scaleFor(16, 18, 20),
+                        color: AppColors.textColors.withOpacity(0.7),
+                      ),
                     ),
                   ),
                 ),
             ],
           ),
           SizedBox(height: scaleFor(4, 5, 6)),
+           /// For web
           isStatus
               ? Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

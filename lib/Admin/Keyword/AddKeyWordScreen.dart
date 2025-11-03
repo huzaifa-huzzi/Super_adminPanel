@@ -116,22 +116,25 @@ class AddKeywordScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: scale(8, 10, 12)),
-                        TextFormField(
-                          controller: controller.keywordCategoryNameController,
-                          focusNode: controller.keywordCategoryNameNode,
-                          keyboardType: TextInputType.url,
-                          cursorColor: Colors.black,
-                          style: TextStyle(
-                              color: Colors.black, fontSize: inputFontSize),
-                          decoration: InputDecoration(
-                            hintText: "Enter keyword Category Name",
-                            hintStyle: TextStyle(
-                                color: AppColors.captionsColor,
-                                fontSize: inputFontSize),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: BorderSide(
-                                  color: AppColors.captionsColor, width: 1),
+                        SizedBox(
+                          height: scale(34, 36, 38),
+                          child: TextFormField(
+                            controller: controller.keywordCategoryNameController,
+                            focusNode: controller.keywordCategoryNameNode,
+                            keyboardType: TextInputType.url,
+                            cursorColor: Colors.black,
+                            style: TextStyle(
+                                color: Colors.black, fontSize: inputFontSize),
+                            decoration: InputDecoration(
+                              hintText: "Enter keyword Category Name",
+                              hintStyle: TextStyle(
+                                  color: AppColors.captionsColor,
+                                  fontSize: inputFontSize),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: BorderSide(
+                                    color: AppColors.captionsColor, width: 1),
+                              ),
                             ),
                           ),
                         ),

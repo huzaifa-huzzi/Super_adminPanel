@@ -153,7 +153,7 @@ class CityScreen extends StatelessWidget {
                       Padding(
                         padding: EdgeInsets.only(bottom: scaleFor(context, 10, 8, 6)),
                         child: Text(
-                          TextStrings.stateContainerTitle,
+                          TextStrings.cityContainerTitle,
                           style: textTheme.headlineSmall?.copyWith(
                             fontSize: labelFontSize,
                             fontWeight: FontWeight.w600,

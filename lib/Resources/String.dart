@@ -34,6 +34,10 @@ class TextStrings {
   static const String editEmployeeTitle = "Edit Employee information";
   static const String editEmployeeSubtitle =  "Quickly update employee details to ensure records remain accurate and up to date.";
   static const String editEmployeeContainerTitle = "Edit Employee";
+  static const String addEmployeeTitle = "Add to employee List";
+  static const String addEmployeeSubtitle = "Easily include a new employee’s details in the company directory. Keep records updated for smooth management.";
+  static const String addEmployeeContainerTitle = "Add New Employee";
+
 
 
 

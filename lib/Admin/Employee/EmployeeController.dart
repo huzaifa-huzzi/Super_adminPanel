@@ -44,17 +44,21 @@ class EmployeeController extends GetxController {
   }
 
   /// Add EmployeeScreen
-  final nameController = TextEditingController();
+  final shortnameController = TextEditingController();
   final usernameController = TextEditingController();
+  final nameController = TextEditingController();
   final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   final statusController = TextEditingController();
   var loading = false.obs;
 
   @override
   void onClose() {
     nameController.dispose();
+    shortnameController.dispose();
     usernameController.dispose();
     passwordController.dispose();
+    confirmPasswordController.dispose();
     statusController.dispose();
     super.onClose();
   }

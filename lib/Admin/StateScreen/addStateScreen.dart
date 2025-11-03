@@ -117,22 +117,25 @@ class AddStateScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: scale(8, 10, 12)),
-                        TextFormField(
-                          controller: controller.countryController,
-                          focusNode: controller.countryNode,
-                          keyboardType: TextInputType.url,
-                          cursorColor: Colors.black,
-                          style: TextStyle(
-                              color: Colors.black, fontSize: inputFontSize),
-                          decoration: InputDecoration(
-                            hintText: "Enter the Country Name",
-                            hintStyle: TextStyle(
-                                color: AppColors.captionsColor,
-                                fontSize: inputFontSize),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: BorderSide(
-                                  color: AppColors.captionsColor, width: 1),
+                        SizedBox(
+                          height: scale(34, 36, 38),
+                          child: TextFormField(
+                            controller: controller.countryController,
+                            focusNode: controller.countryNode,
+                            keyboardType: TextInputType.url,
+                            cursorColor: Colors.black,
+                            style: TextStyle(
+                                color: Colors.black, fontSize: inputFontSize),
+                            decoration: InputDecoration(
+                              hintText: "Enter the Country Name",
+                              hintStyle: TextStyle(
+                                  color: AppColors.captionsColor,
+                                  fontSize: inputFontSize),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: BorderSide(
+                                    color: AppColors.captionsColor, width: 1),
+                              ),
                             ),
                           ),
                         ),
@@ -152,22 +155,25 @@ class AddStateScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(height: scale(8, 10, 12)),
-                        TextFormField(
-                          controller: controller.stateController,
-                          focusNode: controller.stateNode,
-                          keyboardType: TextInputType.url,
-                          cursorColor: Colors.black,
-                          style: TextStyle(
-                              color: Colors.black, fontSize: inputFontSize),
-                          decoration: InputDecoration(
-                            hintText: "Enter the State Name",
-                            hintStyle: TextStyle(
-                                color: AppColors.captionsColor,
-                                fontSize: inputFontSize),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              borderSide: BorderSide(
-                                  color: AppColors.captionsColor, width: 1),
+                        SizedBox(
+                          height: scale(34, 36, 38),
+                          child: TextFormField(
+                            controller: controller.stateController,
+                            focusNode: controller.stateNode,
+                            keyboardType: TextInputType.url,
+                            cursorColor: Colors.black,
+                            style: TextStyle(
+                                color: Colors.black, fontSize: inputFontSize),
+                            decoration: InputDecoration(
+                              hintText: "Enter the State Name",
+                              hintStyle: TextStyle(
+                                  color: AppColors.captionsColor,
+                                  fontSize: inputFontSize),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(4),
+                                borderSide: BorderSide(
+                                    color: AppColors.captionsColor, width: 1),
+                              ),
                             ),
                           ),
                         ),
