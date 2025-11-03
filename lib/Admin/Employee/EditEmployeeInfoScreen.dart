@@ -170,7 +170,6 @@ class EditEmployeeInfoScreen extends StatelessWidget {
         bool isSwitchOn = false,
         ValueChanged<bool>? onToggle,
       }) {
-    final iconSize = scaleFor(16, 18, 20);
     final fontSize = scaleFor(13, 14, 15);
     final valueSize = scaleFor(13, 14, 15);
     final gap = scaleFor(6, 8, 10);
@@ -183,7 +182,7 @@ class EditEmployeeInfoScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-
+              /// Left Icon Box
               Container(
                 height: scaleFor(42, 46, 50),
                 width: scaleFor(42, 46, 50),
@@ -210,13 +209,23 @@ class EditEmployeeInfoScreen extends StatelessWidget {
                   ),
                 ),
               ),
+
+              /// Edit Button Box (Right)
               if (!isStatus)
                 InkWell(
                   onTap: onTap,
-                  child: Icon(
-                    Icons.edit,
-                    size: scaleFor(16, 17, 18),
-                    color: AppColors.textColors.withOpacity(0.7),
+                  child: Container(
+                    height: scaleFor(30, 32, 34),
+                    width: scaleFor(30, 32, 34),
+                    decoration: BoxDecoration(
+                      color: AppColors.dividerColor,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Icon(
+                      Icons.edit,
+                      size: scaleFor(16, 17, 18),
+                      color: AppColors.textColors.withOpacity(0.7),
+                    ),
                   ),
                 ),
             ],
@@ -236,14 +245,28 @@ class EditEmployeeInfoScreen extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              Transform.scale(
-                scale: 0.8,
-                child: Switch(
-                  value: isSwitchOn,
-                  onChanged: onToggle,
-                  activeColor: Colors.white,
-                  inactiveThumbColor: Colors.white,
-                  activeTrackColor: AppColors.activeTextColor,
+
+              /// Switch Box
+              Container(
+                height: scaleFor(36, 38, 40),
+                width: scaleFor(60, 65, 70),
+                padding: EdgeInsets.symmetric(
+                    horizontal: scaleFor(4, 6, 8)),
+                decoration: BoxDecoration(
+                  color: AppColors.dividerColor,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Center(
+                  child: Transform.scale(
+                    scale: 0.8,
+                    child: Switch(
+                      value: isSwitchOn,
+                      onChanged: onToggle,
+                      activeColor: Colors.white,
+                      inactiveThumbColor: Colors.white,
+                      activeTrackColor: AppColors.activeTextColor,
+                    ),
+                  ),
                 ),
               ),
             ],
@@ -261,22 +284,24 @@ class EditEmployeeInfoScreen extends StatelessWidget {
           : Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          ///  Icon Box
+          /// Left Icon Box
           Container(
-            height: scaleFor(16, 15, 13),
-            width: scaleFor(16, 15, 13),
+            height: scaleFor(24, 26, 28),
+            width: scaleFor(24, 26, 28),
             decoration: BoxDecoration(
-              color: Colors.green,
-              borderRadius: BorderRadius.circular(5),
+              color: AppColors.dividerColor,
+              borderRadius: BorderRadius.circular(8),
             ),
             child: Center(
               child: Image.asset(
                 icon,
-                height: scaleFor(14, 13, 12),
-                width: scaleFor(14, 13, 12),
+                height: scaleFor(16, 18, 20),
+                width: scaleFor(16, 18, 20),
+                fit: BoxFit.contain,
               ),
             ),
           ),
+
           SizedBox(width: gap),
           Text(
             label,
@@ -286,6 +311,8 @@ class EditEmployeeInfoScreen extends StatelessWidget {
             ),
           ),
           const Spacer(),
+
+          /// Right Section
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -302,30 +329,56 @@ class EditEmployeeInfoScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(width: scaleFor(6, 8, 10)),
+
+              /// Switch or Edit Box
               isStatus
-                  ? Transform.scale(
-                scale: 0.8,
-                child: Switch(
-                  value: isSwitchOn,
-                  onChanged: onToggle,
-                  activeColor: Colors.white,
-                  inactiveThumbColor: Colors.white,
-                  activeTrackColor: AppColors.activeTextColor,
+                  ? Container(
+                height: scaleFor(28, 30, 32),
+                width: scaleFor(50, 54, 58),
+                decoration: BoxDecoration(
+                  color: AppColors.dividerColor,
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Center(
+                  child: Transform.scale(
+                    scale: 0.65,
+                    child: Switch(
+                      value: isSwitchOn,
+                      onChanged: onToggle,
+                      activeColor: Colors.white,
+                      inactiveThumbColor: Colors.white,
+                      activeTrackColor: AppColors.activeTextColor,
+                      inactiveTrackColor: AppColors.textColors.withOpacity(0.2),
+                    ),
+                  ),
                 ),
               )
                   : InkWell(
                 onTap: onTap,
-                child: Icon(
-                  Icons.edit,
-                  size: scaleFor(16, 17, 18),
-                  color: AppColors.textColors.withOpacity(0.7),
+                child: Container(
+                  height: scaleFor(28, 30, 32),
+                  width: scaleFor(28, 30, 32),
+                  decoration: BoxDecoration(
+                    color: AppColors.dividerColor,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Center(
+                    child: Image.asset(
+                      IconsString.editIcon,
+                      width: scaleFor(16, 18, 20),
+                      height: scaleFor(16, 18, 20),
+                      color: AppColors.textColors.withOpacity(0.7),
+                    ),
+                  ),
                 ),
               ),
+
             ],
           ),
         ],
       ),
     );
   }
+
 
 }
