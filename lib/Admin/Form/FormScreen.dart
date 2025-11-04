@@ -109,9 +109,7 @@ class FormScreen extends StatelessWidget {
                   ),
                 ],
               ),
-
               SizedBox(height: scaleFor(context, 30, 25, 18)),
-
               Center(
                 child: Container(
                   width: double.infinity,
@@ -338,22 +336,4 @@ class FormScreen extends StatelessWidget {
   }
 
 
-  Widget paginationButton(IconData icon,
-      {Color? color, Color? iconColor, required VoidCallback onTap}) {
-    return Container(
-      height: 24,
-      width: 24,
-      margin: const EdgeInsets.symmetric(horizontal: 4),
-      decoration: BoxDecoration(
-        color: color ?? AppColors.primaryColor.withOpacity(0.15),
-        borderRadius: BorderRadius.circular(4),
-        border: Border.all(color: AppColors.primaryColor),
-      ),
-      child: IconButton(
-        padding: EdgeInsets.zero,
-        icon: Icon(icon, color: iconColor ?? AppColors.textColors, size: 14),
-        onPressed: onTap,
-      ),
-    );
-  }
 }
