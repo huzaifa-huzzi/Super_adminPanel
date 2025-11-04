@@ -23,6 +23,9 @@ class IconsString {
   static const String  passwordIcon = 'assets/icons/Password.png';
   static const String  statusIcon = 'assets/icons/status.png';
 
+  /// Form Icons
+  static const String  formIcon = 'assets/icons/form Icon.png';
+
 
 
 

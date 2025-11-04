@@ -8,6 +8,7 @@ import 'package:super_adminPanel/Admin/CountryScreen/addCountryScreen.dart';
 import 'package:super_adminPanel/Admin/Employee/AddEmployeeScreen.dart';
 import 'package:super_adminPanel/Admin/Employee/EditEmployeeInfoScreen.dart';
 import 'package:super_adminPanel/Admin/Employee/EmployeeScreen.dart';
+import 'package:super_adminPanel/Admin/Form/FormScreen.dart';
 import 'package:super_adminPanel/Admin/Keyword/AddKeyWordScreen.dart';
 import 'package:super_adminPanel/Admin/Keyword/KeywordScreen.dart';
 import 'package:super_adminPanel/Admin/Sidebar/Sidebar.dart';
@@ -39,6 +40,10 @@ class MyApp extends StatelessWidget {
             return SideBarScreen(child: child);
           },
           routes: [
+            GoRoute(
+              path: '/form',
+              builder: (context, state) => FormScreen(),
+            ),
             GoRoute(
               path: '/employee',
               builder: (context, state) => EmployeeScreen(),

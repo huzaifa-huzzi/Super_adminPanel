@@ -20,14 +20,14 @@ class TextStrings {
   static const String stateContainerTitle = "List of State";
   static const String addStateSubtitle = "Add state details through this input section.";
 
-  /// City Screen
+  /// City Screen Text
   static const String cityTitle = "City";
   static const String citySubtitle = "Enhances precision in location-based filtering and reporting.";
   static const String cityContainerTitle = "List of City";
   static const String addCitySubtitle = "Add City details through this input section";
 
 
-  /// Employee Screen
+  /// Employee Screen Text
   static const String employeeTitle = "Employee List";
   static const String employeeSubtitle = "Keep all employee details organized in one place. Easily access, manage, and update staff information anytime.";
   static const String employeeContainerTitle = "List of Employees";
@@ -37,6 +37,12 @@ class TextStrings {
   static const String addEmployeeTitle = "Add to employee List";
   static const String addEmployeeSubtitle = "Easily include a new employee’s details in the company directory. Keep records updated for smooth management.";
   static const String addEmployeeContainerTitle = "Add New Employee";
+
+
+  /// Form Screen Text
+  static const String formTitle = "Forms";
+  static const String formSubtitle = "Forms List displays all created forms in the system. You can manage, edit, or delete forms to keep your data organized.";
+
 
 
 

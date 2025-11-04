@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:super_adminPanel/Admin/CityScreen/CityScreen.dart';
 import 'package:super_adminPanel/Admin/CountryScreen/CountryScreen.dart';
 import 'package:super_adminPanel/Admin/Employee/EmployeeScreen.dart';
+import 'package:super_adminPanel/Admin/Form/FormScreen.dart';
 import 'package:super_adminPanel/Admin/Keyword/KeywordScreen.dart';
 import 'package:super_adminPanel/Admin/StateScreen/StateScreen.dart';
 
@@ -19,10 +20,12 @@ class Sidebarcontroller extends GetxController {
 
   final List<Widget> screens = [
     EmployeeScreen(),
+    FormScreen(),
     KeywordScreen(),
     CountryScreen(),
     StateScreen(),
     CityScreen(),
+
   ];
 
   // All route paths
@@ -32,6 +35,8 @@ class Sidebarcontroller extends GetxController {
     '/country',
     '/state',
     '/city',
+    '/form'
+
   ];
 
 
@@ -99,6 +104,9 @@ class Sidebarcontroller extends GetxController {
         return 'state';
       case 4:
         return 'city';
+      case 5:
+        return 'form';
+
       default:
         return 'employee';
     }
@@ -109,16 +117,25 @@ class Sidebarcontroller extends GetxController {
 
 
   bool isParentSelected(String label) {
+    final path = selectedPath.value.toLowerCase();
+
     if (label.toLowerCase() == 'data filter') {
-      return selectedPath.value == '/data-filter' ||
-          selectedPath.value.contains('/keyword') ||
-          selectedPath.value.contains('/country') ||
-          selectedPath.value.contains('/state') ||
-          selectedPath.value.contains('/city');
+      return path == '/data-filter' ||
+          path.contains('/keyword') ||
+          path.contains('/country') ||
+          path.contains('/state') ||
+          path.contains('/city');
     }
+
     if (label.toLowerCase() == 'employees') {
-      return selectedPath.value.contains('/employee');
+      return path.contains('/employee');
     }
+
+    if (label.toLowerCase() == 'forms') {
+      return path.contains('/form');
+    }
+
     return false;
   }
+
 }

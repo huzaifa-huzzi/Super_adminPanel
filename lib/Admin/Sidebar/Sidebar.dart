@@ -16,6 +16,11 @@ class SideBarScreen extends StatelessWidget {
 
   final List<Map<String, dynamic>> baseMenuItems = [
     {
+      'icon': IconsString.formIcon,
+      'label': 'Forms',
+      'path': '/form'
+    },
+    {
       'icon': IconsString.employeeIcon,
       'label': 'Employees',
       'path': '/employee'
@@ -133,8 +138,10 @@ class SideBarScreen extends StatelessWidget {
                           } else {
                             context.go(item['path']);
                             controller.setScreenByRoute(item['path']);
+                            controller.selectedPath.value = item['path'];
                           }
                         },
+
                         child: Container(
                           margin:
                           const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
