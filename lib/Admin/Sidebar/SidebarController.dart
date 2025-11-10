@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:super_adminPanel/Admin/CityScreen/CityScreen.dart';
 import 'package:super_adminPanel/Admin/CountryScreen/CountryScreen.dart';
+import 'package:super_adminPanel/Admin/Dashboard/DashboardScreen.dart';
 import 'package:super_adminPanel/Admin/Employee/EmployeeScreen.dart';
 import 'package:super_adminPanel/Admin/Form/FormScreen.dart';
 import 'package:super_adminPanel/Admin/Keyword/KeywordScreen.dart';
@@ -19,6 +20,7 @@ class Sidebarcontroller extends GetxController {
 
 
   final List<Widget> screens = [
+    DashboardScreen(),
     EmployeeScreen(),
     FormScreen(),
     KeywordScreen(),
@@ -30,6 +32,7 @@ class Sidebarcontroller extends GetxController {
 
   // All route paths
   final List<String> allRoutes = [
+    '/dashboard',
     '/employee',
     '/keyword',
     '/country',
@@ -70,19 +73,26 @@ class Sidebarcontroller extends GetxController {
     selectedPath.value = route;
     final r = route.toLowerCase();
 
-    if (r.contains('employee')) {
-      selectedIndex.value = 0;
 
-
+    if (r.contains('employee') || r.contains('form') || r.contains('dashboard')) {
       dataFilterExpanded.value = false;
-    } else if (r.contains('keyword')) {
+    }
+
+
+    if (r.contains('dashboard')) {
+      selectedIndex.value = 0;
+    } else if (r.contains('employee')) {
       selectedIndex.value = 1;
-    } else if (r.contains('country')) {
+    } else if (r.contains('keyword')) {
       selectedIndex.value = 2;
-    } else if (r.contains('state')) {
+    } else if (r.contains('country')) {
       selectedIndex.value = 3;
-    } else if (r.contains('city')) {
+    } else if (r.contains('state')) {
       selectedIndex.value = 4;
+    } else if (r.contains('city')) {
+      selectedIndex.value = 5;
+    } else if (r.contains('form')) {
+      selectedIndex.value = 6;
     } else {
       selectedIndex.value = 0;
     }
@@ -91,36 +101,37 @@ class Sidebarcontroller extends GetxController {
   }
 
 
+
   String get currentScreenName {
-    if (selectedIndex.value == -1) return 'Profile';
     switch (selectedIndex.value) {
       case 0:
-        return 'employee';
+        return 'Dashboard';
       case 1:
-        return 'keyword';
+        return 'Employee';
       case 2:
-        return 'country';
+        return 'Keyword';
       case 3:
-        return 'state';
+        return 'Country';
       case 4:
-        return 'city';
+        return 'State';
       case 5:
-        return 'form';
-
+        return 'City';
+      case 6:
+        return 'Form';
       default:
-        return 'employee';
+        return 'Dashboard';
     }
   }
 
 
-  bool isSelected(String path) => selectedPath.value == path;
 
+  bool isSelected(String path) => selectedPath.value == path;
 
   bool isParentSelected(String label) {
     final path = selectedPath.value.toLowerCase();
 
     if (label.toLowerCase() == 'data filter') {
-      return path == '/data-filter' ||
+      return dataFilterExpanded.value ||
           path.contains('/keyword') ||
           path.contains('/country') ||
           path.contains('/state') ||
@@ -135,7 +146,13 @@ class Sidebarcontroller extends GetxController {
       return path.contains('/form');
     }
 
+    if (label.toLowerCase() == 'dashboard') {
+      return path.contains('/dashboard');
+    }
+
     return false;
   }
+
+
 
 }

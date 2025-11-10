@@ -5,6 +5,7 @@ import 'package:super_adminPanel/Admin/CityScreen/CityScreen.dart';
 import 'package:super_adminPanel/Admin/CityScreen/addCityScreen.dart';
 import 'package:super_adminPanel/Admin/CountryScreen/CountryScreen.dart';
 import 'package:super_adminPanel/Admin/CountryScreen/addCountryScreen.dart';
+import 'package:super_adminPanel/Admin/Dashboard/DashboardScreen.dart';
 import 'package:super_adminPanel/Admin/Employee/AddEmployeeScreen.dart';
 import 'package:super_adminPanel/Admin/Employee/EditEmployeeInfoScreen.dart';
 import 'package:super_adminPanel/Admin/Employee/EmployeeScreen.dart';
@@ -40,6 +41,10 @@ class MyApp extends StatelessWidget {
             return SideBarScreen(child: child);
           },
           routes: [
+            GoRoute(
+              path: '/dashboard',
+              builder: (context, state) => DashboardScreen(),
+            ),
             GoRoute(
               path: '/form',
               builder: (context, state) => FormScreen(),

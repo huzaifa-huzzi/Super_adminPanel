@@ -1,10 +1,13 @@
 
 
 
+import 'package:flutter/material.dart';
+
 class IconsString {
 
   /// Sidebar Icons
   static const String  employeeIcon = 'assets/icons/users.png';
+  static const String  dashboardIcon = 'assets/icons/dashboardIcon.png';
   static const String  dataFilterIcon = 'assets/icons/Value.png';
   static const String  cityIcon = 'assets/icons/city-icon.png';
   static const String  countryIcon = 'assets/icons/country-icon.png';

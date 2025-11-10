@@ -126,10 +126,7 @@ class FormScreen extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: scaleFor(context, 16, 14, 12)),
                 child: Align(
                   alignment: Alignment.centerLeft,
-                  child: ConstrainedBox(
-                    constraints: BoxConstraints(
-                      maxWidth: screenWidth >= 1000 ? 600 : double.infinity,
-                    ),
+                  child: IntrinsicWidth(
                     child: Container(
                       padding: EdgeInsets.all(scaleFor(context, 12, 10, 8)),
                       height: scaleFor(context, 60, 58, 54),
@@ -145,8 +142,9 @@ class FormScreen extends StatelessWidget {
                         ],
                       ),
                       child: Row(
+                        mainAxisSize: MainAxisSize.min,
                         children: [
-                          /// Status Dropdown
+                          ///  dropdown
                           Flexible(
                             flex: 1,
                             fit: FlexFit.tight,
@@ -182,28 +180,19 @@ class FormScreen extends StatelessWidget {
                                             color: AppColors.textColors,
                                           ),
                                         ),
-
                                         value: controller.selectedCategory.value == "All Keyword Category"
                                             ? null
                                             : controller.selectedCategory.value,
-
-
-                                        hint: Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Text(
-                                            "Status",
-                                            style: TextStyle(
-                                              fontSize: scaleFor(context, 14, 13, 12),
-                                              color: Colors.black,
-                                              fontWeight: FontWeight.normal,
-                                            ),
+                                        hint: Text(
+                                          "Status",
+                                          style: TextStyle(
+                                            fontSize: scaleFor(context, 14, 13, 12),
+                                            color: Colors.black,
                                           ),
                                         ),
-
                                         items: List.generate(controller.keywordCategories.length, (index) {
                                           final item = controller.keywordCategories[index];
                                           final isSelected = controller.selectedCategory.value == item;
-
                                           return DropdownMenuItem<String>(
                                             value: item,
                                             child: Column(
@@ -216,13 +205,12 @@ class FormScreen extends StatelessWidget {
                                                   child: Text(
                                                     item,
                                                     style: TextStyle(
-                                                      fontSize: scaleFor(context, 14, 13, 12),
+                                                      fontSize: scaleFor(context, 13, 12, 11),
                                                       color: isSelected ? Colors.black : AppColors.TextformFieldsTextColor,
                                                       fontWeight: FontWeight.normal,
                                                     ),
                                                   ),
                                                 ),
-
                                                 if (index != controller.keywordCategories.length - 1)
                                                   Padding(
                                                     padding: EdgeInsets.symmetric(vertical: scaleFor(context, 5, 4, 3)),
@@ -242,7 +230,6 @@ class FormScreen extends StatelessWidget {
                                       ),
                                     )),
                                   ),
-
                                 ],
                               ),
                             ),
@@ -250,60 +237,59 @@ class FormScreen extends StatelessWidget {
 
                           SizedBox(width: scaleFor(context, 8, 6, 4)),
 
-                          /// Search Field
-                          Flexible(
-                            flex: 2,
-                            fit: FlexFit.tight,
-                            child: Row(
-                              children: [
-                                Expanded(
-                                  child: Container(
-                                    height: double.infinity,
-                                    decoration: BoxDecoration(
-                                      color: AppColors.dividerColor,
-                                      borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(color: Colors.black26),
-                                    ),
-                                    child: Center(
-                                      child: TextField(
-                                        controller: controller.searchController,
-                                        style: TextStyle(fontSize: scaleFor(context, 12, 11, 10)),
-                                        decoration: InputDecoration(
-                                          hintText: "Search here...",
-                                          hintStyle: TextStyle(
-                                            fontSize: scaleFor(context, 14, 12, 10),
-                                            color: AppColors.TextformFieldsTextColor,
-                                          ),
-                                          isDense: true,
-                                          contentPadding: EdgeInsets.symmetric(
-                                            vertical: 0,
-                                            horizontal: scaleFor(context, 12, 10, 8),
-                                          ),
-                                          border: InputBorder.none,
-                                        ),
+                          /// Search bar only for tablet/web
+                          if (!isMobile) ...[
+                            SizedBox(width: scaleFor(context, 6, 5, 4)),
+                            Flexible(
+                              flex: 2,
+                              child: Container(
+                                height: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: AppColors.dividerColor,
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(color: Colors.black26),
+                                ),
+                                child: Center(
+                                  child: TextField(
+                                    controller: controller.searchController,
+                                    style: TextStyle(fontSize: scaleFor(context, 12, 11, 10)),
+                                    decoration: InputDecoration(
+                                      hintText: "Search here...",
+                                      hintStyle: TextStyle(
+                                        fontSize: scaleFor(context, 14, 12, 10),
+                                        color: AppColors.TextformFieldsTextColor,
                                       ),
+                                      isDense: true,
+                                      contentPadding: EdgeInsets.symmetric(
+                                        vertical: 0,
+                                        horizontal: scaleFor(context, 12, 10, 8),
+                                      ),
+                                      border: InputBorder.none,
                                     ),
                                   ),
                                 ),
-                                SizedBox(width: scaleFor(context, 6, 5, 4)),
-                                Container(
-                                  height: double.infinity,
-                                  width: scaleFor(context, 38, 36, 32),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.primaryColor,
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: IconButton(
-                                    padding: EdgeInsets.zero,
-                                    icon: Icon(
-                                      Icons.search,
-                                      color: Colors.white,
-                                      size: scaleFor(context, 20, 18, 16),
-                                    ),
-                                    onPressed: () {},
-                                  ),
-                                ),
-                              ],
+                              ),
+                            ),
+                          ],
+
+                          SizedBox(width: scaleFor(context, 8, 6, 4)),
+
+                          /// Search icon
+                          Container(
+                            height: double.infinity,
+                            width: scaleFor(context, 38, 36, 38),
+                            decoration: BoxDecoration(
+                              color: AppColors.primaryColor,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: IconButton(
+                              padding: EdgeInsets.zero,
+                              icon: Icon(
+                                Icons.search,
+                                color: Colors.white,
+                                size: scaleFor(context, 20, 18, 16),
+                              ),
+                              onPressed: () {},
                             ),
                           ),
                         ],
@@ -312,10 +298,6 @@ class FormScreen extends StatelessWidget {
                   ),
                 ),
               ),
-
-
-
-
               SizedBox(height: scaleFor(context, 30, 25, 18)),
               Center(
                 child: Container(

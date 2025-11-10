@@ -16,6 +16,11 @@ class SideBarScreen extends StatelessWidget {
 
   final List<Map<String, dynamic>> baseMenuItems = [
     {
+      'icon': IconsString.dashboardIcon,
+      'label': 'Dashboard',
+      'path': '/dashboard'
+    },
+    {
       'icon': IconsString.formIcon,
       'label': 'Forms',
       'path': '/form'
@@ -110,9 +115,14 @@ class SideBarScreen extends StatelessWidget {
       final bool isCollapsed = controller.isCollapsed.value;
       final double targetWidth = isCollapsed ? 125 : 200;
 
+
+      final double drawerWidth = isDrawer
+          ? MediaQuery.of(context).size.width * 0.7
+          : targetWidth;
+
       return AnimatedContainer(
         duration: const Duration(milliseconds: 100),
-        width: targetWidth,
+        width: drawerWidth,
         color: AppColors.appBarColor,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -130,7 +140,7 @@ class SideBarScreen extends StatelessWidget {
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      //  Parents Items
+                      // Parent Items
                       InkWell(
                         onTap: () {
                           if (hasChildren) {
@@ -139,23 +149,20 @@ class SideBarScreen extends StatelessWidget {
                             context.go(item['path']);
                             controller.setScreenByRoute(item['path']);
                             controller.selectedPath.value = item['path'];
+
+
+                            if (isDrawer) Navigator.pop(context);
                           }
                         },
-
                         child: Container(
-                          margin:
-                          const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 12, horizontal: 8),
+                          margin: const EdgeInsets.symmetric(vertical: 2, horizontal: 4),
+                          padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
                           decoration: BoxDecoration(
                             gradient: isParentSelected
                                 ? const LinearGradient(
                               begin: Alignment.centerLeft,
                               end: Alignment.centerRight,
-                              colors: [
-                                Color(0xFFF8F8F9),
-                                Color(0xFF0085FF),
-                              ],
+                              colors: [Color(0xFFF8F8F9), Color(0xFF0085FF)],
                               stops: [0.01, 1.0],
                             )
                                 : null,
@@ -188,9 +195,7 @@ class SideBarScreen extends StatelessWidget {
                               ],
                               if (hasChildren)
                                 Padding(
-                                  padding: EdgeInsets.only(
-                                    left: isCollapsed ? 4 : 0,
-                                  ),
+                                  padding: EdgeInsets.only(left: isCollapsed ? 4 : 0),
                                   child: Icon(
                                     isExpanded
                                         ? Icons.keyboard_arrow_down
@@ -205,28 +210,25 @@ class SideBarScreen extends StatelessWidget {
                         ),
                       ),
 
-                      // Expanding and collapsing
+                      // Expanding sub-items
                       if (hasChildren && isExpanded)
                         Padding(
-                          padding: EdgeInsets.only(
-                            left: isCollapsed ? 30 : 35,
-                          ),
+                          padding: EdgeInsets.only(left: isCollapsed ? 30 : 35),
                           child: Column(
-                            children:
-                            (item['children'] as List).map<Widget>((subItem) {
-                              final bool isSelected =
-                                  controller.selectedPath.value ==
-                                      subItem['path'];
+                            children: (item['children'] as List).map<Widget>((subItem) {
+                              final bool isSelected = controller.selectedPath.value == subItem['path'];
                               return InkWell(
                                 onTap: () {
                                   context.go(subItem['path']);
                                   controller.setScreenByRoute(subItem['path']);
+                                  controller.selectedPath.value = subItem['path'];
+
+
+                                  if (isDrawer) Navigator.pop(context);
                                 },
                                 child: Container(
-                                  margin: const EdgeInsets.symmetric(
-                                      vertical: 3, horizontal: 2),
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 8, horizontal: 6),
+                                  margin: const EdgeInsets.symmetric(vertical: 3, horizontal: 2),
+                                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 6),
                                   decoration: BoxDecoration(
                                     border: Border.all(
                                       color: isSelected
@@ -241,7 +243,6 @@ class SideBarScreen extends StatelessWidget {
                                         ? MainAxisAlignment.center
                                         : MainAxisAlignment.start,
                                     children: [
-
                                       Image.asset(
                                         subItem['icon'],
                                         width: 18,
@@ -250,8 +251,6 @@ class SideBarScreen extends StatelessWidget {
                                             ? AppColors.primaryColor
                                             : AppColors.textColors,
                                       ),
-
-
                                       if (!isCollapsed) ...[
                                         const SizedBox(width: 8),
                                         Expanded(
@@ -283,6 +282,7 @@ class SideBarScreen extends StatelessWidget {
       );
     });
   }
+
 
 
 
