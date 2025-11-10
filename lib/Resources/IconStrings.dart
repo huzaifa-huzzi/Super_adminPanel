@@ -25,6 +25,10 @@ class IconsString {
 
   /// Form Icons
   static const String  formIcon = 'assets/icons/form Icon.png';
+  static const String  downloadIcon = 'assets/icons/downloadIcon.png';
+  static const String  filterIcon = 'assets/icons/filterIcon.png';
+  static const String  dropdownIcon = 'assets/icons/dropdownIcon.png';
+
 
 
 

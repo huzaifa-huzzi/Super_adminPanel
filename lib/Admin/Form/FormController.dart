@@ -1,9 +1,33 @@
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
 class FormController extends GetxController {
   RxList<Map<String, String>> forms = <Map<String, String>>[].obs;
   RxInt currentPage = 1.obs;
-  RxInt totalPages = 1.obs;
+  RxInt totalPages = 5.obs;
+  RxString selectedStatus = "All Status".obs;
+  TextEditingController searchController = TextEditingController();
+  RxString selectedCategory = "All Keyword Category".obs;
+
+
+
+  final List<String> keywordCategories = [
+    "All Keyword Category",
+    "Keyword Title",
+    "Number Type",
+    "Phone Number",
+    "Email",
+    "Website",
+    "Country",
+    "State",
+    "City",
+    "Suburb",
+    "Zip Code",
+    "Address",
+    "Lazina",
+  ];
+
+
 
   FormController() {
     forms.assignAll([
@@ -11,9 +35,9 @@ class FormController extends GetxController {
         'Sn': '01',
         'Keyword Category': 'Digital Marketing',
         'Keyword Title': 'Demo Title',
-        'Name': 'Jennifer Howard',
+        'Name': 'Lazina Pramarik',
         'Number Type': 'Business',
-        'Number': '+000-1111222',
+        'Number': '+880-1111222',
         'Email': 'demoemail@gmail.com',
         'Website': 'https://demoexample.com',
         'Country': 'Australia',
@@ -28,9 +52,9 @@ class FormController extends GetxController {
         'Sn': '02',
         'Keyword Category': 'General Partnership',
         'Keyword Title': 'Demo Title',
-        'Name': 'Jennifer Howard',
+        'Name': 'Lazina Pramarik',
         'Number Type': 'Personal',
-        'Number': '+000-1111223',
+        'Number': '+880-1111223',
         'Email': 'demoemail@gmail.com',
         'Website': 'https://demoexample.com',
         'Country': 'Pakistan',
@@ -43,11 +67,11 @@ class FormController extends GetxController {
       },
       {
         'Sn': '03',
-        'Keyword Category': 'Corporations',
+        'Keyword Category': 'C Corporations',
         'Keyword Title': 'Demo Title',
-        'Name': 'Jennifer Howard',
+        'Name': 'Lazina Pramarik',
         'Number Type': 'Business',
-        'Number': '+000-1111224',
+        'Number': '+880-1111224',
         'Email': 'demoemail@gmail.com',
         'Website': 'https://demoexample.com',
         'Country': 'Bangladesh',
@@ -60,11 +84,11 @@ class FormController extends GetxController {
       },
       {
         'Sn': '04',
-        'Keyword Category': 'Our Industries',
+        'Keyword Category': 'Car Washes',
         'Keyword Title': 'Demo Title',
-        'Name': 'Jennifer Howard',
+        'Name': 'Lazina Pramarik',
         'Number Type': 'Business',
-        'Number': '+000-1111225',
+        'Number': '+880-1111225',
         'Email': 'demoemail@gmail.com',
         'Website': 'https://demoexample.com',
         'Country': 'South Korea',
@@ -77,11 +101,11 @@ class FormController extends GetxController {
       },
       {
         'Sn': '05',
-        'Keyword Category': 'Retail Industry',
+        'Keyword Category': 'Real Estate',
         'Keyword Title': 'Demo Title',
-        'Name': 'Jennifer Howard',
+        'Name': 'Lazina Pramarik',
         'Number Type': 'Business',
-        'Number': '+000-1111226',
+        'Number': '+880-1111226',
         'Email': 'demoemail@gmail.com',
         'Website': 'https://demoexample.com',
         'Country': 'Canada',
@@ -94,11 +118,11 @@ class FormController extends GetxController {
       },
       {
         'Sn': '06',
-        'Keyword Category': 'Email Management',
+        'Keyword Category': 'Event Management',
         'Keyword Title': 'Demo Title',
-        'Name': 'Jennifer Howard',
+        'Name': 'Lazina Pramarik',
         'Number Type': 'Personal',
-        'Number': '+000-1111227',
+        'Number': '+880-1111227',
         'Email': 'demoemail@gmail.com',
         'Website': 'https://demoexample.com',
         'Country': 'United States',
@@ -112,6 +136,7 @@ class FormController extends GetxController {
     ]);
 
   }
+
 
 
   void nextPage() {
@@ -134,6 +159,7 @@ class FormController extends GetxController {
       update();
     }
   }
+
 
 
 }
