@@ -121,7 +121,7 @@ class FormScreen extends StatelessWidget {
    ]
       ),
               SizedBox(height: scaleFor(context, 20, 18, 14)),
-              // Status + Search Row
+              /// Status + Search Row
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: scaleFor(context, 16, 14, 12)),
                 child: Align(
@@ -192,7 +192,6 @@ class FormScreen extends StatelessWidget {
                                         ),
                                         items: List.generate(controller.keywordCategories.length, (index) {
                                           final item = controller.keywordCategories[index];
-                                          final isSelected = controller.selectedCategory.value == item;
                                           return DropdownMenuItem<String>(
                                             value: item,
                                             child: Column(
@@ -206,7 +205,7 @@ class FormScreen extends StatelessWidget {
                                                     item,
                                                     style: TextStyle(
                                                       fontSize: scaleFor(context, 13, 12, 11),
-                                                      color: isSelected ? Colors.black : AppColors.TextformFieldsTextColor,
+                                                      color:Colors.black,
                                                       fontWeight: FontWeight.normal,
                                                     ),
                                                   ),

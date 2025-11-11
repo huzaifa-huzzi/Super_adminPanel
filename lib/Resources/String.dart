@@ -43,6 +43,11 @@ class TextStrings {
   static const String formTitle = "Forms";
   static const String formSubtitle = "Forms List displays all created forms in the system. You can manage, edit, or delete forms to keep your data organized.";
 
+  /// Dashboard Screen
+  static const String dashboardTitle = ' Lead Management Dashboard';
+  static const String dashboardSubtitle = ' Track and manage your sales pipeline like a boss';
+
+
 
 
 

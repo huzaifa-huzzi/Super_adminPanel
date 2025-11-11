@@ -24,7 +24,7 @@ class FormController extends GetxController {
     "Suburb",
     "Zip Code",
     "Address",
-    "Lazina",
+    "Submitted By",
   ];
 
 

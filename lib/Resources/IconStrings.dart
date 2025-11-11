@@ -1,6 +1,3 @@
-
-
-
 import 'package:flutter/material.dart';
 
 class IconsString {
@@ -31,6 +28,9 @@ class IconsString {
   static const String  downloadIcon = 'assets/icons/downloadIcon.png';
   static const String  filterIcon = 'assets/icons/filterIcon.png';
   static const String  dropdownIcon = 'assets/icons/dropdownIcon.png';
+
+  /// Dashboard Icons
+  static const String  calendarIcon = 'assets/icons/calendar.png';
 
 
 
