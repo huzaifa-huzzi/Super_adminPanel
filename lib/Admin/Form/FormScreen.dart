@@ -251,7 +251,11 @@ class FormScreen extends StatelessWidget {
                                 child: Center(
                                   child: TextField(
                                     controller: controller.searchController,
-                                    style: TextStyle(fontSize: scaleFor(context, 12, 11, 10)),
+                                    cursorColor: Colors.black,
+                                    style: TextStyle(
+                                      fontSize: scaleFor(context, 12, 11, 10),
+                                      color: Colors.black,
+                                    ),
                                     decoration: InputDecoration(
                                       hintText: "Search here...",
                                       hintStyle: TextStyle(
@@ -269,6 +273,7 @@ class FormScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
+
                           ],
 
                           SizedBox(width: scaleFor(context, 8, 6, 4)),
