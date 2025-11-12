@@ -749,7 +749,6 @@ class SideBarScreen extends StatelessWidget {
     }
 
 
-
   /// ---------------- Mobile AppBar ---------------- ///
   PreferredSizeWidget buildMobileAppBar(
       BuildContext context, double screenWidth) {
