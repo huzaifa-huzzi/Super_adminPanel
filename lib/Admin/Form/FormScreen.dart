@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:super_adminPanel/Admin/Form/FormController.dart';
+import 'package:super_adminPanel/Admin/Form/Widget/DownoadPopMenuButton.dart';
 import 'package:super_adminPanel/Resources/Colors.dart';
 import 'package:super_adminPanel/Resources/IconStrings.dart';
 import 'package:super_adminPanel/Resources/String.dart';
@@ -70,56 +71,61 @@ class FormScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-        isMobile || isTablet
-            ? Container(
-          height: scaleFor(context, 38, 36, 34),
-          width: scaleFor(context, 38, 36, 34),
-          decoration: BoxDecoration(
-            color: AppColors.primaryColor,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: IconButton(
-            icon: Image.asset(
-              IconsString.downloadIcon,
-              height: scaleFor(context, 18, 17, 16),
-              width: scaleFor(context, 18, 17, 16),
-              color: Colors.white,
-            ),
-            onPressed: () {
-              // TODO: Add your download logic here
-            },
-          ),
-        )
-            : ElevatedButton.icon(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primaryColor,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(6),
-            ),
-            padding: EdgeInsets.symmetric(
-              horizontal: scaleFor(context, 18, 16, 14),
-              vertical: scaleFor(context, 10, 9, 8),
-            ),
-          ),
-          icon: Image.asset(
-            IconsString.downloadIcon,
-            height: scaleFor(context, 18, 17, 16),
-            width: scaleFor(context, 18, 17, 16),
-            color: Colors.white,
-          ),
-          label: Text(
-            "Download Now",
-            style: textTheme.bodyMedium?.copyWith(
-              color: Colors.white,
-              fontSize: labelFontSize,
-            ),
-          ),
-          onPressed: () {
-            // TODO: Add your download logic here
-          },
-        ),
-   ]
-      ),
+
+
+                  Builder(
+                    builder: (context) {
+
+                      return isMobile || isTablet
+                          ? Container(
+                        key: controller.popupKey,
+                        height: scaleFor(context, 38, 36, 34),
+                        width: scaleFor(context, 38, 36, 34),
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryColor,
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: IconButton(
+                          icon: Image.asset(
+                            IconsString.downloadIcon,
+                            height: scaleFor(context, 18, 17, 16),
+                            width: scaleFor(context, 18, 17, 16),
+                            color: Colors.white,
+                          ),
+                          onPressed:() => controller.showPopupMenu(context),
+                        ),
+                      )
+                          : ElevatedButton.icon(
+                        key: controller.popupKey,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryColor,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: scaleFor(context, 18, 16, 14),
+                            vertical: scaleFor(context, 10, 9, 8),
+                          ),
+                        ),
+                        icon: Image.asset(
+                          IconsString.downloadIcon,
+                          height: scaleFor(context, 18, 17, 16),
+                          width: scaleFor(context, 18, 17, 16),
+                          color: Colors.white,
+                        ),
+                        label: Text(
+                          "Download Now",
+                          style: textTheme.bodyMedium?.copyWith(
+                            color: Colors.white,
+                            fontSize: labelFontSize,
+                          ),
+                        ),
+                        onPressed:() => controller.showPopupMenu(context) ,
+                      );
+                    },
+                  ),
+                ],
+              ),
               SizedBox(height: scaleFor(context, 20, 18, 14)),
               /// Status + Search Row
               Padding(
@@ -172,7 +178,7 @@ class FormScreen extends StatelessWidget {
                                         isExpanded: true,
                                         dropdownColor: AppColors.dividerColor,
                                         icon: Padding(
-                                          padding: EdgeInsets.only(right: 8),
+                                          padding: const EdgeInsets.only(right: 8),
                                           child: Image.asset(
                                             IconsString.dropdownIcon,
                                             height: scaleFor(context, 16, 14, 12),
@@ -192,34 +198,34 @@ class FormScreen extends StatelessWidget {
                                         ),
                                         items: List.generate(controller.keywordCategories.length, (index) {
                                           final item = controller.keywordCategories[index];
+                                          final isSelected = item == controller.selectedCategory.value;
+
                                           return DropdownMenuItem<String>(
                                             value: item,
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Container(
-                                                  height: scaleFor(context, 36, 34, 32),
-                                                  alignment: Alignment.centerLeft,
-                                                  child: Text(
-                                                    item,
-                                                    style: TextStyle(
-                                                      fontSize: scaleFor(context, 13, 12, 11),
-                                                      color:Colors.black,
-                                                      fontWeight: FontWeight.normal,
-                                                    ),
+                                            child: Container(
+                                              height: scaleFor(context, 36, 34, 32),
+                                              alignment: Alignment.centerLeft,
+                                              decoration: BoxDecoration(
+                                                border: !isSelected && index != controller.keywordCategories.length - 1
+                                                    ? Border(
+                                                  bottom: BorderSide(
+                                                    color: AppColors.TextformFieldsTextColor,
+                                                    width: 1,
                                                   ),
+                                                )
+                                                    : null,
+                                              ),
+                                              child: Text(
+                                                item,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: TextStyle(
+                                                  fontSize: scaleFor(context, 13, 12, 11),
+                                                  color: Colors.black,
+                                                  fontWeight: item == "All Keyword Category"
+                                                      ? FontWeight.bold
+                                                      : FontWeight.normal,
                                                 ),
-                                                if (index != controller.keywordCategories.length - 1)
-                                                  Padding(
-                                                    padding: EdgeInsets.symmetric(vertical: scaleFor(context, 5, 4, 3)),
-                                                    child: Divider(
-                                                      color: AppColors.TextformFieldsTextColor,
-                                                      thickness: 1,
-                                                      height: 1,
-                                                    ),
-                                                  ),
-                                              ],
+                                              ),
                                             ),
                                           );
                                         }),
@@ -233,6 +239,7 @@ class FormScreen extends StatelessWidget {
                               ),
                             ),
                           ),
+
 
                           SizedBox(width: scaleFor(context, 8, 6, 4)),
 

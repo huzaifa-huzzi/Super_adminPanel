@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:super_adminPanel/Resources/Colors.dart';
 
 class FormController extends GetxController {
   RxList<Map<String, String>> forms = <Map<String, String>>[].obs;
@@ -8,6 +9,7 @@ class FormController extends GetxController {
   RxString selectedStatus = "All Status".obs;
   TextEditingController searchController = TextEditingController();
   RxString selectedCategory = "All Keyword Category".obs;
+  final popupKey = GlobalKey();
 
 
 
@@ -26,6 +28,109 @@ class FormController extends GetxController {
     "Address",
     "Submitted By",
   ];
+
+
+   /// download Now Code
+  final downloadOptions = <String>[
+    'All',
+    'Digital marketing',
+    'General Partnership',
+    'C Corporation',
+    'Car Washes',
+    'Real Estate',
+    'Event Management',
+  ].obs;
+
+  final selectedOptions = <String, bool>{
+    'All': true,
+    'Digital marketing': false,
+    'General Partnership': false,
+    'C Corporation': false,
+    'Car Washes': false,
+    'Real Estate':false,
+    'Event Management':false,
+  }.obs;
+
+  void toggleOption(String key, bool value) {
+    selectedOptions[key] = value;
+    selectedOptions.refresh();
+  }
+
+
+  void showPopupMenu(BuildContext context) {
+    final RenderBox button =
+    popupKey.currentContext!.findRenderObject() as RenderBox;
+    final RenderBox overlay =
+    Overlay.of(context).context.findRenderObject() as RenderBox;
+
+    showMenu(
+      context: context,
+      color: AppColors.dividerColor,
+      elevation: 8,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+      position: RelativeRect.fromRect(
+        Rect.fromPoints(
+          button.localToGlobal(Offset.zero, ancestor: overlay),
+          button.localToGlobal(button.size.bottomRight(Offset.zero),
+              ancestor: overlay),
+        ),
+        Offset.zero & overlay.size,
+      ),
+      items: [
+        PopupMenuItem(
+          enabled: false,
+          padding: EdgeInsets.zero,
+          child: Obx(() {
+            final options = downloadOptions;
+            final selected = selectedOptions;
+
+            return Container(
+              width: 260,
+              decoration: BoxDecoration(
+                color: AppColors.dividerColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  for (int i = 0; i < options.length; i++) ...[
+                    CheckboxListTile(
+                      dense: true,
+                      contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 12),
+                      title: Text(
+                        options[i],
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400,
+                          color: AppColors.TextformFieldsTextColor,
+                        ),
+                      ),
+                      controlAffinity: ListTileControlAffinity.trailing,
+                      visualDensity: const VisualDensity(vertical: -4),
+                      activeColor: AppColors.primaryColor,
+                      value: selected[options[i]],
+                      onChanged: (bool? value) {
+                        toggleOption(options[i], value ?? false);
+                      },
+                    ),
+                    if (i != options.length - 1)
+                      const Divider(
+                        height: 1,
+                        thickness: 0.7,
+                        color: Color(0xFFE0E0E0),
+                      ),
+                  ],
+                ],
+              ),
+            );
+          }),
+        ),
+      ],
+    );
+  }
+
+
 
 
 

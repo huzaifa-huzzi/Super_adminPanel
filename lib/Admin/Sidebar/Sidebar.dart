@@ -527,216 +527,227 @@ class SideBarScreen extends StatelessWidget {
   /// ---------------- Tablet AppBar ---------------- ///
   PreferredSizeWidget buildTabletAppBar(BuildContext context, double screenWidth) {
     return PreferredSize(
-      preferredSize: const Size.fromHeight(56),
-      child: AppBar(
-        backgroundColor: AppColors.appBarColor,
-        automaticallyImplyLeading: false,
-        elevation: 0,
-        titleSpacing: 12,
-        title: Row(
+        preferredSize: const Size.fromHeight(56),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
-            /// Logo + Chevron (Left side)
-            Text(
-              "LOGO",
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                color: AppColors.captionsColor,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(width: screenWidth * 0.13),
-            Obx(() => GestureDetector(
-              onTap: () => controller.toggleCollapse(),
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: AppColors.backgroundOfSearchBar,
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(
-                  controller.isCollapsed.value
-                      ? Icons.chevron_right
-                      : Icons.chevron_left,
-                  color: AppColors.textColors,
-                ),
-              ),
-            )),
-
-            const Spacer(),
-
-            Obx(() => AnimatedSwitcher(
-              duration: const Duration(milliseconds: 300),
-              transitionBuilder: (child, anim) =>
-                  SizeTransition(sizeFactor: anim, axis: Axis.horizontal, child: child),
-              child: controller.showSearch.value
-                  ? Container(
-                key: const ValueKey("searchBar"),
-                width: 200,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: AppColors.backgroundOfSearchBar,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: AppColors.captionsColor,
-                    width: 0.5,
-                  ),
-                ),
-                alignment: Alignment.center,
-                child: TextField(
-                  autofocus: true,
-                  cursorColor: AppColors.captionsColor,
-                  style: TextStyle(fontSize: 14, color: AppColors.textColors),
-                  textAlignVertical: TextAlignVertical.center,
-                  decoration: InputDecoration(
-                    isCollapsed: true,
-                    contentPadding: const EdgeInsets.symmetric(vertical: 8),
-                    border: InputBorder.none,
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.only(left: 8, right: 6),
-                      child: Icon(Icons.search, size: 18, color: Colors.grey),
-                    ),
-                    prefixIconConstraints: const BoxConstraints(
-                      minWidth: 24,
-                      minHeight: 24,
-                    ),
-                    hintText: "Search...",
-                    hintStyle: const TextStyle(fontSize: 14, color: Colors.grey),
-                    suffixIcon: IconButton(
-                      icon: const Icon(Icons.close, size: 18, color: Colors.grey),
-                      padding: EdgeInsets.zero,
-                      constraints: const BoxConstraints(),
-                      onPressed: () => controller.showSearch.value = false,
+            AppBar(
+              backgroundColor: AppColors.appBarColor,
+              automaticallyImplyLeading: false,
+              elevation: 0,
+              titleSpacing: 12,
+              title: Row(
+                children: [
+                  /// Logo + Chevron (Left side)
+                  Text(
+                    "LOGO",
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: AppColors.captionsColor,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                ),
-              )
-                  : IconButton(
-                key: const ValueKey("searchIcon"),
-                icon: Icon(Icons.search, size: 22, color: AppColors.captionsColor),
-                onPressed: () => controller.showSearch.value = true,
-              ),
-            )),
+                  SizedBox(width: screenWidth * 0.13),
+                  Obx(() => GestureDetector(
+                    onTap: () => controller.toggleCollapse(),
+                    child: Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: AppColors.backgroundOfSearchBar,
+                        shape: BoxShape.circle,
+                      ),
+                      child: Icon(
+                        controller.isCollapsed.value
+                            ? Icons.chevron_right
+                            : Icons.chevron_left,
+                        color: AppColors.textColors,
+                      ),
+                    ),
+                  )),
 
-            SizedBox(width: screenWidth * 0.04),
+                  const Spacer(),
 
-            /// Profile Popup
-            GestureDetector(
-              onTapDown: (details) async {
-                final overlay =
-                Overlay.of(context).context.findRenderObject() as RenderBox;
+                  Obx(() => AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 300),
+                    transitionBuilder: (child, anim) =>
+                        SizeTransition(sizeFactor: anim, axis: Axis.horizontal, child: child),
+                    child: controller.showSearch.value
+                        ? Container(
+                      key: const ValueKey("searchBar"),
+                      width: 200,
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: AppColors.backgroundOfSearchBar,
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(
+                          color: AppColors.captionsColor,
+                          width: 0.5,
+                        ),
+                      ),
+                      alignment: Alignment.center,
+                      child: TextField(
+                        autofocus: true,
+                        cursorColor: AppColors.captionsColor,
+                        style: TextStyle(fontSize: 14, color: AppColors.textColors),
+                        textAlignVertical: TextAlignVertical.center,
+                        decoration: InputDecoration(
+                          isCollapsed: true,
+                          contentPadding: const EdgeInsets.symmetric(vertical: 8),
+                          border: InputBorder.none,
+                          prefixIcon: Padding(
+                            padding: const EdgeInsets.only(left: 8, right: 6),
+                            child: Icon(Icons.search, size: 18, color: Colors.grey),
+                          ),
+                          prefixIconConstraints: const BoxConstraints(
+                            minWidth: 24,
+                            minHeight: 24,
+                          ),
+                          hintText: "Search...",
+                          hintStyle: const TextStyle(fontSize: 14, color: Colors.grey),
+                          suffixIcon: IconButton(
+                            icon: const Icon(Icons.close, size: 18, color: Colors.grey),
+                            padding: EdgeInsets.zero,
+                            constraints: const BoxConstraints(),
+                            onPressed: () => controller.showSearch.value = false,
+                          ),
+                        ),
+                      ),
+                    )
+                        : IconButton(
+                      key: const ValueKey("searchIcon"),
+                      icon: Icon(Icons.search, size: 22, color: AppColors.captionsColor),
+                      onPressed: () => controller.showSearch.value = true,
+                    ),
+                  )),
 
-                final position = RelativeRect.fromLTRB(
-                  details.globalPosition.dx,
-                  details.globalPosition.dy,
-                  overlay.size.width - details.globalPosition.dx,
-                  overlay.size.height - details.globalPosition.dy,
-                );
+                  SizedBox(width: screenWidth * 0.04),
 
-                final result = await showMenu<String>(
-                  context: context,
-                  position: position,
-                  color: Colors.white,
-                  shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
-                  items: [
-                    /// Profile Details
-                    PopupMenuItem<String>(
-                      value: "profile",
-                      padding: EdgeInsets.zero,
-                      child: StatefulBuilder(
-                        builder: (context, setState) {
+                  /// Profile Popup
+                  GestureDetector(
+                    onTapDown: (details) async {
+                      final overlay =
+                      Overlay.of(context).context.findRenderObject() as RenderBox;
 
-                          return InkWell(
-                            onHover: (hovering) => setState(() => controller.isHovered = hovering),
-                            onTap: () => Navigator.pop(context, "profile"),
+                      final position = RelativeRect.fromLTRB(
+                        details.globalPosition.dx,
+                        details.globalPosition.dy,
+                        overlay.size.width - details.globalPosition.dx,
+                        overlay.size.height - details.globalPosition.dy,
+                      );
+
+                      final result = await showMenu<String>(
+                        context: context,
+                        position: position,
+                        color: Colors.white,
+                        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+                        items: [
+                          /// Profile Details
+                          PopupMenuItem<String>(
+                            value: "profile",
+                            padding: EdgeInsets.zero,
+                            child: StatefulBuilder(
+                              builder: (context, setState) {
+
+                                return InkWell(
+                                  onHover: (hovering) => setState(() => controller.isHovered = hovering),
+                                  onTap: () => Navigator.pop(context, "profile"),
+                                  child: Container(
+                                    height: 45,
+                                    width: double.infinity,
+                                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                                    decoration: controller.isHovered
+                                        ? const BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.centerLeft,
+                                        end: Alignment.centerRight,
+                                        colors: [
+                                          Color(0xFFF8F8F9),
+                                          Color(0xFF0085FF),
+                                        ],
+                                        stops: [0.01, 1.0],
+                                      ),
+                                    )
+                                        : const BoxDecoration(),
+                                    child:  Row(
+                                      children: [
+                                        Icon(
+                                          Icons.info_outline,
+                                          size: 18,
+                                          color: controller.isHovered ? AppColors.primaryColor : Colors.black,
+                                        ),
+                                        const SizedBox(width: 8),
+                                        Text(
+                                          "Profile Details",
+                                          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                            color: controller.isHovered ? Colors.white : Colors.black,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+
+                          /// Logout (Red background)
+                          PopupMenuItem<String>(
+                            value: "logout",
+                            padding: EdgeInsets.zero,
                             child: Container(
                               height: 45,
                               width: double.infinity,
+                              color: Color(0xFFFFE5E5),
                               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                              decoration: controller.isHovered
-                                  ? const BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.centerLeft,
-                                  end: Alignment.centerRight,
-                                  colors: [
-                                    Color(0xFFF8F8F9),
-                                    Color(0xFF0085FF),
-                                  ],
-                                  stops: [0.01, 1.0],
-                                ),
-                              )
-                                  : const BoxDecoration(),
-                              child:  Row(
+                              child: const Row(
                                 children: [
-                                  Icon(
-                                    Icons.info_outline,
-                                    size: 18,
-                                    color: controller.isHovered ? AppColors.primaryColor : Colors.black,
-                                  ),
-                                  const SizedBox(width: 8),
+                                  Icon(Icons.logout, size: 18, color: Colors.red),
+                                  SizedBox(width: 8),
                                   Text(
-                                    "Profile Details",
-                                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                      color: controller.isHovered ? Colors.white : Colors.black,
-                                    ),
+                                    "Logout",
+                                    style: TextStyle(fontSize: 14, color: Colors.red),
                                   ),
                                 ],
                               ),
                             ),
-                          );
-                        },
+                          ),
+                        ],
+                      );
+
+                      if (result == "profile") {
+                        context.go('/profile');
+                      } else if (result == "logout") {
+                        context.go('/login');
+                      }
+                    },
+
+                    /// Avatar Trigger
+                    child: CircleAvatar(
+                      radius: 16,
+                      backgroundColor:AppColors.applyButtonColors ,
+                      child: Center(
+                          child: Center(
+                            child: Text('LP',style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                              fontSize: 13,
+                              color: AppColors.textColors,
+                            ),),
+                          )
                       ),
                     ),
+                  ),
 
-                    /// Logout (Red background)
-                    PopupMenuItem<String>(
-                      value: "logout",
-                      padding: EdgeInsets.zero,
-                      child: Container(
-                        height: 45,
-                        width: double.infinity,
-                        color: Color(0xFFFFE5E5),
-                        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                        child: const Row(
-                          children: [
-                            Icon(Icons.logout, size: 18, color: Colors.red),
-                            SizedBox(width: 8),
-                            Text(
-                              "Logout",
-                              style: TextStyle(fontSize: 14, color: Colors.red),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-
-                if (result == "profile") {
-                  context.go('/profile');
-                } else if (result == "logout") {
-                  context.go('/login');
-                }
-              },
-
-              /// Avatar Trigger
-              child: CircleAvatar(
-                radius: 16,
-                backgroundColor:AppColors.applyButtonColors ,
-                child: Center(
-                    child: Center(
-                      child: Text('LP',style: Theme.of(context).textTheme.titleSmall!.copyWith(
-                        fontSize: 13,
-                        color: AppColors.textColors,
-                      ),),
-                    )
-                ),
+                ],
               ),
-            )
-
+            ),
+            const Divider(
+              height: 0,
+              color: AppColors.captionsColor,
+              thickness: 0.5,
+            ),
           ],
-        ),
-      ),
+        )
     );
-  }
+    }
+
 
 
   /// ---------------- Mobile AppBar ---------------- ///
@@ -744,130 +755,151 @@ class SideBarScreen extends StatelessWidget {
       BuildContext context, double screenWidth) {
     return PreferredSize(
       preferredSize: const Size.fromHeight(56),
-      child: Obx(
-            () => AppBar(
-          backgroundColor: AppColors.appBarColor,
-          automaticallyImplyLeading: false,
-          elevation: 0,
-          titleSpacing: 12,
-          title: Row(
-            children: [
-              /// Logo
-              Text(
-                "LOGO",
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                  color: AppColors.captionsColor,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 13,
-                ),
-              ),
-              const Spacer(),
-
-              Row(
-                mainAxisSize: MainAxisSize.min,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Obx(
+                () => AppBar(
+              backgroundColor: AppColors.appBarColor,
+              automaticallyImplyLeading: false,
+              elevation: 0,
+              titleSpacing: 12,
+              title: Row(
                 children: [
-                  /// Search Toggle
-                  AnimatedSwitcher(
-                    duration: const Duration(milliseconds: 300),
-                    transitionBuilder: (child, anim) =>
-                        SizeTransition(sizeFactor: anim, axis: Axis.horizontal, child: child),
-                    child: controller.showSearch.value
-                        ? Builder(
-                      builder: (context) {
-                        final isMobile = screenWidth < 600;
-                        final barWidth = isMobile ? screenWidth * 0.4 : screenWidth * 0.5;
-                        final barHeight = isMobile ? 32.0 : 36.0;
-                        final iconSize = isMobile ? 16.0 : 20.0;
-                        final fontSize = isMobile ? 12.0 : 14.0;
-
-                        return Container(
-                          key: const ValueKey("searchBar"),
-                          width: barWidth,
-                          height: barHeight,
-                          padding: const EdgeInsets.symmetric(horizontal: 8),
-                          decoration: BoxDecoration(
-                            color: AppColors.backgroundOfSearchBar,
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(
-                              color: AppColors.captionsColor,
-                              width: 0.5,
-                            ),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(Icons.search, size: iconSize, color: Colors.grey),
-                              const SizedBox(width: 6),
-                              Expanded(
-                                child: TextField(
-                                  autofocus: true,
-                                  cursorColor: AppColors.captionsColor,
-                                  style: TextStyle(
-                                    fontSize: fontSize,
-                                    color: AppColors.textColors,
-                                  ),
-                                  decoration: InputDecoration(
-                                    isCollapsed: true,
-                                    border: InputBorder.none,
-                                    hintText: "Search...",
-                                    hintStyle: TextStyle(fontSize: fontSize, color: Colors.grey),
-                                  ),
-                                ),
-                              ),
-                              IconButton(
-                                padding: EdgeInsets.zero,
-                                constraints: const BoxConstraints(),
-                                icon: Icon(Icons.close, size: iconSize, color: Colors.grey),
-                                onPressed: () => controller.showSearch.value = false,
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    )
-                        : IconButton(
-                      key: const ValueKey("searchIcon"),
-                      icon: Icon(
-                        Icons.search,
-                        size: 22,
-                        color: AppColors.captionsColor,
-                      ),
-                      onPressed: () => controller.showSearch.value = true,
+                  /// Logo
+                  Text(
+                    "LOGO",
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: AppColors.captionsColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
                     ),
                   ),
+                  const Spacer(),
 
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      /// Search Toggle
+                      AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 300),
+                        transitionBuilder: (child, anim) =>
+                            SizeTransition(
+                                sizeFactor: anim,
+                                axis: Axis.horizontal,
+                                child: child),
+                        child: controller.showSearch.value
+                            ? Builder(
+                          builder: (context) {
+                            final isMobile = screenWidth < 600;
+                            final barWidth = isMobile
+                                ? screenWidth * 0.4
+                                : screenWidth * 0.5;
+                            final barHeight = isMobile ? 32.0 : 36.0;
+                            final iconSize = isMobile ? 16.0 : 20.0;
+                            final fontSize = isMobile ? 12.0 : 14.0;
 
-                  SizedBox(width: screenWidth * 0.02),
-
-                  /// Drawer Menu Icon
-                  Builder(
-                    builder: (context) => GestureDetector(
-                      onTap: () => Scaffold.of(context).openDrawer(),
-                      child: Container(
-                        width: 36,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          color: AppColors.backgroundOfSearchBar,
-                          shape: BoxShape.circle,
+                            return Container(
+                              key: const ValueKey("searchBar"),
+                              width: barWidth,
+                              height: barHeight,
+                              padding:
+                              const EdgeInsets.symmetric(horizontal: 8),
+                              decoration: BoxDecoration(
+                                color: AppColors.backgroundOfSearchBar,
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: AppColors.captionsColor,
+                                  width: 0.5,
+                                ),
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.search,
+                                      size: iconSize, color: Colors.grey),
+                                  const SizedBox(width: 6),
+                                  Expanded(
+                                    child: TextField(
+                                      autofocus: true,
+                                      cursorColor: AppColors.captionsColor,
+                                      style: TextStyle(
+                                        fontSize: fontSize,
+                                        color: AppColors.textColors,
+                                      ),
+                                      decoration: InputDecoration(
+                                        isCollapsed: true,
+                                        border: InputBorder.none,
+                                        hintText: "Search...",
+                                        hintStyle: TextStyle(
+                                            fontSize: fontSize,
+                                            color: Colors.grey),
+                                      ),
+                                    ),
+                                  ),
+                                  IconButton(
+                                    padding: EdgeInsets.zero,
+                                    constraints: const BoxConstraints(),
+                                    icon: Icon(Icons.close,
+                                        size: iconSize, color: Colors.grey),
+                                    onPressed: () =>
+                                    controller.showSearch.value = false,
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        )
+                            : IconButton(
+                          key: const ValueKey("searchIcon"),
+                          icon: Icon(
+                            Icons.search,
+                            size: 22,
+                            color: AppColors.captionsColor,
+                          ),
+                          onPressed: () => controller.showSearch.value = true,
                         ),
-                        child: Center(
-                          child: Image.asset(
-                            IconsString.menuIcon,
-                            width: 16,
-                            height: 16,
-                            fit: BoxFit.contain,
+                      ),
+
+                      SizedBox(width: screenWidth * 0.02),
+
+                      /// Drawer Menu Icon
+                      Builder(
+                        builder: (context) => GestureDetector(
+                          onTap: () => Scaffold.of(context).openDrawer(),
+                          child: Container(
+                            width: 36,
+                            height: 36,
+                            decoration: BoxDecoration(
+                              color: AppColors.backgroundOfSearchBar,
+                              shape: BoxShape.circle,
+                            ),
+                            child: Center(
+                              child: Image.asset(
+                                IconsString.menuIcon,
+                                width: 16,
+                                height: 16,
+                                fit: BoxFit.contain,
+                              ),
+                            ),
                           ),
                         ),
                       ),
-                    ),
+                    ],
                   ),
                 ],
               ),
-            ],
+            ),
           ),
-        ),
+          const Divider(
+            height: 0,
+            color: AppColors.captionsColor,
+            thickness: 0.5,
+          ),
+        ],
       ),
     );
   }
+
 
 
 
