@@ -3,12 +3,16 @@ import 'package:get/get.dart';
 import 'package:go_router/go_router.dart';
 import 'package:super_adminPanel/Admin/Dashboard/DashboardController.dart';
 import 'package:super_adminPanel/Admin/Dashboard/KeywordCategoryWidget.dart';
+import 'package:super_adminPanel/Admin/Dashboard/LeadsByEmployeeWidget.dart';
 import 'package:super_adminPanel/Admin/Dashboard/MissingChartDataWidget.dart';
+import 'package:super_adminPanel/Admin/Dashboard/NumberTypeWidget.dart';
 import 'package:super_adminPanel/Admin/Dashboard/StatePieChartWidget.dart';
 import 'package:super_adminPanel/Admin/Dashboard/WeakLeadsDataWidget.dart';
 import 'package:super_adminPanel/Admin/Sidebar/SidebarController.dart';
 import 'package:super_adminPanel/Resources/Colors.dart';
 import 'package:super_adminPanel/Resources/String.dart';
+
+
 
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
@@ -198,6 +202,11 @@ class DashboardScreen extends StatelessWidget {
                         controller: controller),
                     SizedBox(height: sectionSpacing),
                     KeywordCategoryWidget(),
+                    SizedBox(height: sectionSpacing),
+                    const LeadsByEmployeeWidget(),
+                    SizedBox(height: sectionSpacing),
+                    const NumberTypesWidget(),
+
                   ],
                 )
                     : SingleChildScrollView(
@@ -220,6 +229,15 @@ class DashboardScreen extends StatelessWidget {
                             SizedBox(width: spacing),
                             Flexible(
                                 flex: 2, child: KeywordCategoryWidget()),
+                            SizedBox(height: sectionSpacing),
+                             Flexible(
+                                 flex: 2,
+                                 child: LeadsByEmployeeWidget()),
+                            SizedBox(height: sectionSpacing),
+                            Flexible(
+                                flex: 2,
+                                child:  NumberTypesWidget()),
+
                           ],
                         ),
 
