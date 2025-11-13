@@ -4,6 +4,8 @@ import 'package:super_adminPanel/Resources/Colors.dart';
 class NumberTypesWidget extends StatelessWidget {
   const NumberTypesWidget({super.key});
 
+
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
