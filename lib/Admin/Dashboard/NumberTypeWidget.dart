@@ -23,9 +23,9 @@ class NumberTypesWidget extends StatelessWidget {
 
     final numberTypes = ["Business", "Personal"];
 
-    // X-axis position
     final xAxisBottom = scale(20, 24, 28);
-
+    final yAxisLeft = scale(45, 75, 85);
+    final labelWidth = scale(55, 70, 90);
 
     return Container(
       width: double.infinity,
@@ -48,22 +48,22 @@ class NumberTypesWidget extends StatelessWidget {
           ),
           SizedBox(height: padding * 3),
 
-
           Stack(
             children: [
-
+              // Y-axis line
               Positioned(
                 top: 0,
-                bottom: xAxisBottom - scale(4, 4, 4),
-                left: scale(80, 100, 110),
+                bottom: xAxisBottom,
+                left: yAxisLeft,
                 child: Container(
                   width: 1,
                   color: Colors.black,
                 ),
               ),
+
               // X-axis
               Positioned(
-                left: scale(80, 100, 110),
+                left: yAxisLeft,
                 right: 0,
                 bottom: xAxisBottom,
                 child: Container(
@@ -72,7 +72,25 @@ class NumberTypesWidget extends StatelessWidget {
                 ),
               ),
 
+              // Vertical "LEAD" text (shared for both bars)
+              Positioned(
+                top: 0,
+                bottom: xAxisBottom + scale(10, 12, 14),
+                left: yAxisLeft - scale(25, 30, 35), // thoda gap left se
+                child: RotatedBox(
+                  quarterTurns: 3,
+                  child: Text(
+                    "LEAD",
+                    style: TextStyle(
+                      fontSize: labelFontSize,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ),
+              ),
 
+              // Bars
               Padding(
                 padding: EdgeInsets.only(
                   left: 0,
@@ -85,13 +103,13 @@ class NumberTypesWidget extends StatelessWidget {
                     final progress = values[index] / maxValue;
 
                     return Padding(
-                      padding: EdgeInsets.only(bottom: scale(12, 14, 16)),
+                      padding: EdgeInsets.only(bottom: scale(8, 10, 12)),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           // Y-axis label
                           SizedBox(
-                            width: scale(80, 100, 110),
+                            width: labelWidth,
                             child: Text(
                               numberTypes[index],
                               style: TextStyle(
@@ -101,27 +119,22 @@ class NumberTypesWidget extends StatelessWidget {
                               ),
                             ),
                           ),
-                          SizedBox(width: scale(10, 12, 14)),
+                          SizedBox(width: scale(4, 6, 8)),
 
-                          // Bars
+                          // Bar
                           Expanded(
-                            child: Stack(
-                              children: [
-
-                                Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: FractionallySizedBox(
-                                    widthFactor: progress,
-                                    child: Container(
-                                      height: barHeight,
-                                      decoration: BoxDecoration(
-                                        color: AppColors.primaryColor,
-                                        borderRadius: BorderRadius.circular(50),
-                                      ),
-                                    ),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: FractionallySizedBox(
+                                widthFactor: progress,
+                                child: Container(
+                                  height: barHeight,
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primaryColor,
+                                    borderRadius: BorderRadius.circular(50),
                                   ),
                                 ),
-                              ],
+                              ),
                             ),
                           ),
                         ],
@@ -133,9 +146,11 @@ class NumberTypesWidget extends StatelessWidget {
             ],
           ),
 
+          SizedBox(height: scale(8, 10, 12)),
+
           // Counts
           Padding(
-            padding: EdgeInsets.only(left: scale(50, 70, 90)),
+            padding: EdgeInsets.only(left: yAxisLeft - scale(15, 15, 15)),
             child: Row(
               children: List.generate(5, (i) {
                 final step = maxValue - (maxValue / 4) * i;
@@ -148,7 +163,7 @@ class NumberTypesWidget extends StatelessWidget {
                       style: TextStyle(
                         fontSize: labelFontSize,
                         color: Colors.black,
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.bold, // bold counts
                       ),
                     ),
                   ),
