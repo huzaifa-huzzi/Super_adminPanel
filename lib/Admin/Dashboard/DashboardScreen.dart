@@ -187,30 +187,62 @@ class DashboardScreen extends StatelessWidget {
 
 
                 /// ---------- SECOND ROW ----------
-                /// ---------- SECOND ROW ----------
-                if (isMobile || isTablet)
-                  ...[
-                    MissingDataChartWidget(),
-                    SizedBox(height: sectionSpacing),
+              if (isMobile || isTablet)
+                SingleChildScrollView(
+                  padding: EdgeInsets.all(sectionSpacing),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
 
-                    StatesPieChartWidget(),
-                    SizedBox(height: sectionSpacing),
+                      /// ---------- Missing Data Chart ----------
+                      SizedBox(
+                        height: 250,
+                        child: MissingDataChartWidget(),
+                      ),
+                      SizedBox(height: sectionSpacing),
 
-                    WeeklyLeadsChart(
-                        padding: padding,
-                        spacing: spacing,
-                        controller: controller),
-                    SizedBox(height: sectionSpacing),
+                      /// ---------- States Pie Chart ----------
+                      SizedBox(
+                        height: 250,
+                        child: StatesPieChartWidget(),
+                      ),
+                      SizedBox(height: sectionSpacing),
 
-                    KeywordCategoryWidget(),
-                    SizedBox(height: sectionSpacing),
+                      /// ---------- Weekly Leads Chart ----------
+                      SizedBox(
+                        height: 380,
+                        child: WeeklyLeadsChart(
+                          padding: padding,
+                          spacing: spacing,
+                          controller: controller,
+                        ),
+                      ),
+                      SizedBox(height: sectionSpacing),
 
-                    LeadsByEmployeeWidget(),
-                    SizedBox(height: sectionSpacing),
+                      /// ---------- Keyword Category ----------
+                      SizedBox(
+                        height: 450,
+                        child: KeywordCategoryWidget(),
+                      ),
+                      SizedBox(height: sectionSpacing),
 
-                    NumberTypesWidget(),
-                  ]
-               else
+                      /// ---------- Leads By Employee ----------
+                      SizedBox(
+                        height: 320,
+                        child: LeadsByEmployeeWidget(),
+                      ),
+                      SizedBox(height: sectionSpacing),
+
+                      /// ---------- Number Types ----------
+                      SizedBox(
+                        height: 260,
+                        child: NumberTypesWidget(),
+                      ),
+                    ],
+                  ),
+                )
+
+              else
                   SingleChildScrollView(
                     padding: EdgeInsets.all(spacing),
                     child: Stack(
@@ -221,7 +253,6 @@ class DashboardScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
 
-                            /// -------- ROW 1: Missing + Pie + Keyword Category --------
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -257,7 +288,7 @@ class DashboardScreen extends StatelessWidget {
 
                             SizedBox(height: 100),
 
-                            /// -------- Leads By Employee --------
+                            /// -------- Leads By Employee(Widget) --------
                             SizedBox(
                               height: 365,
                               width: screenWidth,
@@ -266,7 +297,7 @@ class DashboardScreen extends StatelessWidget {
 
                             SizedBox(height: spacing * 2),
 
-                            /// -------- Number Types --------
+                            /// -------- Number Types(Widget) --------
                             SizedBox(
                               height: 260,
                               width: screenWidth,
@@ -275,7 +306,7 @@ class DashboardScreen extends StatelessWidget {
                           ],
                         ),
 
-                        /// -------- Weekly Leads Chart on top --------
+                        /// -------- Weekly Leads Chart(Widget) --------
                         Positioned(
                           top: 250 + spacing * 1,
                           left: spacing,
