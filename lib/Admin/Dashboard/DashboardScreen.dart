@@ -194,21 +194,21 @@ class DashboardScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
 
-                      /// ---------- Missing Data Chart ----------
+                      /// Missing Data Chart
                       SizedBox(
                         height: 250,
                         child: MissingDataChartWidget(),
                       ),
                       SizedBox(height: sectionSpacing),
 
-                      /// ---------- States Pie Chart ----------
+                      ///  States Pie Chart
                       SizedBox(
                         height: 250,
                         child: StatesPieChartWidget(),
                       ),
                       SizedBox(height: sectionSpacing),
 
-                      /// ---------- Weekly Leads Chart ----------
+                      ///  Weekly Leads Chart
                       SizedBox(
                         height: 380,
                         child: WeeklyLeadsChart(
@@ -219,21 +219,21 @@ class DashboardScreen extends StatelessWidget {
                       ),
                       SizedBox(height: sectionSpacing),
 
-                      /// ---------- Keyword Category ----------
+                      ///  Keyword Category
                       SizedBox(
                         height: 450,
                         child: KeywordCategoryWidget(),
                       ),
                       SizedBox(height: sectionSpacing),
 
-                      /// ---------- Leads By Employee ----------
+                      ///  Leads By Employee
                       SizedBox(
-                        height: 320,
+                        height: 360,
                         child: LeadsByEmployeeWidget(),
                       ),
                       SizedBox(height: sectionSpacing),
 
-                      /// ---------- Number Types ----------
+                      ///  Number Types
                       SizedBox(
                         height: 260,
                         child: NumberTypesWidget(),
@@ -290,7 +290,7 @@ class DashboardScreen extends StatelessWidget {
 
                             /// -------- Leads By Employee(Widget) --------
                             SizedBox(
-                              height: 365,
+                              height: 400,
                               width: screenWidth,
                               child: LeadsByEmployeeWidget(),
                             ),

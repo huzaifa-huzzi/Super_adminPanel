@@ -23,7 +23,7 @@ class _LeadsByEmployeeWidgetState extends State<LeadsByEmployeeWidget> {
   final leadsYear = [420, 390, 350, 300, 280];
 
   // Responsive scaling function
-  double scaleValue(BuildContext context, double mobile, double tablet, double web) {
+  double scale(BuildContext context, double mobile, double tablet, double web) {
     final width = MediaQuery.of(context).size.width;
     if (width < 600) return mobile;
     if (width < 1024) return tablet;
@@ -32,14 +32,20 @@ class _LeadsByEmployeeWidgetState extends State<LeadsByEmployeeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final padding = scaleValue(context, 12, 16, 20);
-    final titleFontSize = scaleValue(context, 14, 15, 16);
-    final nameFontSize = scaleValue(context, 11, 12, 13);
-    final valueFontSize = scaleValue(context, 10, 11, 12);
-    final barHeight = scaleValue(context, 26, 28, 30);
-    final avatarRadius = scaleValue(context, 14, 16, 18);
-    final spacingBetweenRows = scaleValue(context, 10, 12, 14);
-    final spacingBetweenElements = scaleValue(context, 10, 12, 16);
+    // Scaling all parameters
+    final padding = scale(context, 12, 16, 20);
+    final containerRadius = scale(context, 12, 14, 16);
+    final titleFontSize = scale(context, 16, 18, 20);
+    final nameFontSize = scale(context, 12, 14, 16);
+    final valueFontSize = scale(context, 10, 12, 14);
+    final barHeight = scale(context, 28, 32, 36);
+    final avatarRadius = scale(context, 16, 18, 20);
+    final spacingRows = scale(context, 12, 14, 16);
+    final spacingColumns = scale(context, 10, 12, 14);
+    final dropdownHeight = scale(context, 36, 38, 40);
+    final dropdownPadding = scale(context, 12, 14, 16);
+    final dropdownRadius = scale(context, 6, 8, 10);
+    final dropdownIconSize = scale(context, 18, 20, 22);
 
     final currentLeads = selectedPeriod == 'Month' ? leadsMonth : leadsYear;
     final maxLead = currentLeads.reduce((a, b) => a > b ? a : b).toDouble();
@@ -49,12 +55,19 @@ class _LeadsByEmployeeWidgetState extends State<LeadsByEmployeeWidget> {
       padding: EdgeInsets.all(padding),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(scaleValue(context, 12, 14, 16)),
+        borderRadius: BorderRadius.circular(containerRadius),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          /// Header Row with Dropdown
+          /// Header: Text + Dropdown
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -67,17 +80,17 @@ class _LeadsByEmployeeWidgetState extends State<LeadsByEmployeeWidget> {
                 ),
               ),
               Container(
-                height: scaleValue(context, 34, 36, 38),
-                padding: EdgeInsets.symmetric(horizontal: scaleValue(context, 10, 12, 14)),
+                height: dropdownHeight,
+                padding: EdgeInsets.symmetric(horizontal: dropdownPadding),
                 decoration: BoxDecoration(
                   color: AppColors.dividerColor,
-                  borderRadius: BorderRadius.circular(scaleValue(context, 6, 8, 10)),
+                  borderRadius: BorderRadius.circular(dropdownRadius),
                   border: Border.all(color: AppColors.TextformFieldsTextColor),
                 ),
                 child: DropdownButtonHideUnderline(
                   child: DropdownButton<String>(
                     value: selectedPeriod,
-                    icon: Icon(Icons.keyboard_arrow_down, size: scaleValue(context, 18, 20, 22), color: Colors.black),
+                    icon: Icon(Icons.keyboard_arrow_down, size: dropdownIconSize, color: Colors.black),
                     items: ['Month', 'Year'].map((e) {
                       return DropdownMenuItem(
                         value: e,
@@ -90,7 +103,7 @@ class _LeadsByEmployeeWidgetState extends State<LeadsByEmployeeWidget> {
                     onChanged: (value) {
                       if (value != null && value != selectedPeriod) {
                         setState(() => isExpanded = false);
-                        Future.delayed(Duration(milliseconds: 250), () {
+                        Future.delayed(const Duration(milliseconds: 300), () {
                           setState(() {
                             selectedPeriod = value;
                             isExpanded = true;
@@ -103,16 +116,15 @@ class _LeadsByEmployeeWidgetState extends State<LeadsByEmployeeWidget> {
               ),
             ],
           ),
-          SizedBox(height: spacingBetweenElements),
+          SizedBox(height: padding),
 
-          /// Horizontal Bars
+          /// Employee Bars
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: List.generate(employees.length, (index) {
               final progress = currentLeads[index] / maxLead;
-
               return Padding(
-                padding: EdgeInsets.only(bottom: spacingBetweenRows),
+                padding: EdgeInsets.only(bottom: spacingRows),
                 child: Row(
                   children: [
                     /// Employee Name
@@ -125,7 +137,7 @@ class _LeadsByEmployeeWidgetState extends State<LeadsByEmployeeWidget> {
                       ),
                     ),
 
-                    SizedBox(width: spacingBetweenElements),
+                    SizedBox(width: spacingColumns),
 
                     /// Avatar
                     CircleAvatar(
@@ -133,13 +145,13 @@ class _LeadsByEmployeeWidgetState extends State<LeadsByEmployeeWidget> {
                       backgroundColor: Colors.grey.shade300,
                     ),
 
-                    SizedBox(width: spacingBetweenElements * 1.5),
+                    SizedBox(width: spacingColumns),
 
-                    /// Animated Bars
+                    /// Animated Bar
                     Expanded(
                       child: TweenAnimationBuilder<double>(
                         tween: Tween<double>(begin: 0, end: isExpanded ? progress : 0),
-                        duration: Duration(milliseconds: 600),
+                        duration: const Duration(milliseconds: 600),
                         curve: Curves.easeInOut,
                         builder: (context, value, child) {
                           return Stack(
@@ -161,7 +173,7 @@ class _LeadsByEmployeeWidgetState extends State<LeadsByEmployeeWidget> {
                                     borderRadius: BorderRadius.circular(barHeight / 2),
                                   ),
                                   alignment: Alignment.centerRight,
-                                  padding: EdgeInsets.only(right: scaleValue(context, 8, 10, 12)),
+                                  padding: EdgeInsets.only(right: scale(context, 8, 10, 12)),
                                   child: Text(
                                     currentLeads[index].toString(),
                                     style: TextStyle(

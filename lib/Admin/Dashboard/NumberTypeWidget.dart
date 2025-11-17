@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:super_adminPanel/Resources/Colors.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class NumberTypesWidget extends StatelessWidget {
@@ -77,8 +78,6 @@ class NumberTypesWidget extends StatelessWidget {
                   minimum: 0,
                   maximum: 400,
                   interval: 100,
-
-
                   labelStyle: TextStyle(
                     fontSize: scale(context, 11),
                     fontWeight: FontWeight.w600,
@@ -86,8 +85,8 @@ class NumberTypesWidget extends StatelessWidget {
                   ),
 
                   majorGridLines: const MajorGridLines(
-                    color: Color(0xFFE0E0E0),
-                    width: 0.7,
+                    color: AppColors.dividerColor,
+                    width: 0.0,
                   ),
                   axisLine: const AxisLine(color: Colors.black, width: 1),
                 ),
