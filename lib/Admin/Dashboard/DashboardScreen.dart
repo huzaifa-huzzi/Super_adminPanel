@@ -187,60 +187,101 @@ class DashboardScreen extends StatelessWidget {
 
 
                 /// ---------- SECOND ROW ----------
-                isMobile || isTablet
-                    ? Column(
-                  children: [
+                /// ---------- SECOND ROW ----------
+                if (isMobile || isTablet)
+                  ...[
                     MissingDataChartWidget(),
                     SizedBox(height: sectionSpacing),
+
                     StatesPieChartWidget(),
                     SizedBox(height: sectionSpacing),
+
                     WeeklyLeadsChart(
                         padding: padding,
                         spacing: spacing,
                         controller: controller),
                     SizedBox(height: sectionSpacing),
+
                     KeywordCategoryWidget(),
                     SizedBox(height: sectionSpacing),
+
                     LeadsByEmployeeWidget(),
                     SizedBox(height: sectionSpacing),
+
                     NumberTypesWidget(),
-                  ],
-                )
-                    : SingleChildScrollView(
-                  padding: EdgeInsets.all(padding),
-                  child: SizedBox(
-                    width: screenWidth,
+                  ]
+               else
+                  SingleChildScrollView(
+                    padding: EdgeInsets.all(spacing),
                     child: Stack(
-                      clipBehavior: Clip.none,
                       children: [
-                        // Top Row
-                        Row(
+
+                        /// -------- Main Column --------
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Flexible(
-                                flex: 2,
-                                child: MissingDataChartWidget()),
-                            SizedBox(width: spacing),
-                            Flexible(
-                                flex: 2, child: StatesPieChartWidget()),
-                            SizedBox(width: spacing),
-                            Flexible(
-                                flex: 2, child: KeywordCategoryWidget()),
-                            SizedBox(width: spacing),
-                            Flexible(
-                                flex: 2, child: LeadsByEmployeeWidget()),
-                            SizedBox(width: spacing),
-                            Flexible(
-                                flex: 2, child: NumberTypesWidget()),
 
+                            /// -------- ROW 1: Missing + Pie + Keyword Category --------
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: SizedBox(
+                                    height: 250,
+                                    child: MissingDataChartWidget(),
+                                  ),
+                                ),
+
+                                SizedBox(width: spacing * 0.5),
+
+                                Expanded(
+                                  flex: 2,
+                                  child: SizedBox(
+                                    height: 250,
+                                    child: StatesPieChartWidget(),
+                                  ),
+                                ),
+
+                                SizedBox(width: spacing * 0.5),
+
+                                Flexible(
+                                  flex: 2,
+                                  child: SizedBox(
+                                    height: 590,
+                                    child: KeywordCategoryWidget(),
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(height: 100),
+
+                            /// -------- Leads By Employee --------
+                            SizedBox(
+                              height: 365,
+                              width: screenWidth,
+                              child: LeadsByEmployeeWidget(),
+                            ),
+
+                            SizedBox(height: spacing * 2),
+
+                            /// -------- Number Types --------
+                            SizedBox(
+                              height: 260,
+                              width: screenWidth,
+                              child: NumberTypesWidget(),
+                            ),
                           ],
                         ),
 
+                        /// -------- Weekly Leads Chart on top --------
                         Positioned(
-                          top: 280,
-                          left: 0,
+                          top: 250 + spacing * 1,
+                          left: spacing,
                           child: SizedBox(
-                            width: screenWidth * 0.60,
+                            width: screenWidth * 0.6,
+                            height: 380,
                             child: WeeklyLeadsChart(
                               padding: padding,
                               spacing: spacing,
@@ -251,7 +292,6 @@ class DashboardScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                )
               ],
             ),
           );
