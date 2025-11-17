@@ -6,6 +6,7 @@ import 'package:super_adminPanel/Admin/CityScreen/addCityScreen.dart';
 import 'package:super_adminPanel/Admin/CountryScreen/CountryScreen.dart';
 import 'package:super_adminPanel/Admin/CountryScreen/addCountryScreen.dart';
 import 'package:super_adminPanel/Admin/Dashboard/DashboardScreen.dart';
+import 'package:super_adminPanel/Admin/Dashboard/NumberTypeWidget.dart';
 import 'package:super_adminPanel/Admin/Employee/AddEmployeeScreen.dart';
 import 'package:super_adminPanel/Admin/Employee/EditEmployeeInfoScreen.dart';
 import 'package:super_adminPanel/Admin/Employee/EmployeeScreen.dart';

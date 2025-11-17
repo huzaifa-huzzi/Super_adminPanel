@@ -12,8 +12,6 @@ import 'package:super_adminPanel/Admin/Sidebar/SidebarController.dart';
 import 'package:super_adminPanel/Resources/Colors.dart';
 import 'package:super_adminPanel/Resources/String.dart';
 
-
-
 class DashboardScreen extends StatelessWidget {
   const DashboardScreen({super.key});
 
@@ -42,7 +40,7 @@ class DashboardScreen extends StatelessWidget {
     final cardTitleFont = scale(12, 14, 15);
     final cardValueFont = scale(16, 18, 20);
 
-    //  spacing for sections
+    //  spacing for sections (only mobile/tablet)
     final sectionSpacing = isMobile
         ? 24.0
         : isTablet
@@ -104,7 +102,7 @@ class DashboardScreen extends StatelessWidget {
                               final sidebarController =
                               Get.find<Sidebarcontroller>();
                               sidebarController.selectedIndex.value = 1;
-                              GoRouter.of(context).go('/formsubmit');
+                              GoRouter.of(context).go('/form');
                             },
                           ),
                         )
@@ -136,7 +134,7 @@ class DashboardScreen extends StatelessWidget {
                             final sidebarController =
                             Get.find<Sidebarcontroller>();
                             sidebarController.selectedIndex.value = 1;
-                            GoRouter.of(context).go('/formsubmit');
+                            GoRouter.of(context).go('/form');
                           },
                         ),
                       ],
@@ -203,10 +201,9 @@ class DashboardScreen extends StatelessWidget {
                     SizedBox(height: sectionSpacing),
                     KeywordCategoryWidget(),
                     SizedBox(height: sectionSpacing),
-                    const LeadsByEmployeeWidget(),
+                    LeadsByEmployeeWidget(),
                     SizedBox(height: sectionSpacing),
-                    const NumberTypesWidget(),
-
+                    NumberTypesWidget(),
                   ],
                 )
                     : SingleChildScrollView(
@@ -229,14 +226,12 @@ class DashboardScreen extends StatelessWidget {
                             SizedBox(width: spacing),
                             Flexible(
                                 flex: 2, child: KeywordCategoryWidget()),
-                            SizedBox(height: sectionSpacing),
-                             Flexible(
-                                 flex: 2,
-                                 child: LeadsByEmployeeWidget()),
-                            SizedBox(height: sectionSpacing),
+                            SizedBox(width: spacing),
                             Flexible(
-                                flex: 2,
-                                child:  NumberTypesWidget()),
+                                flex: 2, child: LeadsByEmployeeWidget()),
+                            SizedBox(width: spacing),
+                            Flexible(
+                                flex: 2, child: NumberTypesWidget()),
 
                           ],
                         ),

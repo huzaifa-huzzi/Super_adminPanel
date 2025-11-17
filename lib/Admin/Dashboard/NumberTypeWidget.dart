@@ -1,178 +1,127 @@
 import 'package:flutter/material.dart';
-import 'package:super_adminPanel/Resources/Colors.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class NumberTypesWidget extends StatelessWidget {
   const NumberTypesWidget({super.key});
 
+  double scale(BuildContext context, double size) {
+    final w = MediaQuery.of(context).size.width;
+    if (w < 500) return size * 0.8;
+    if (w < 900) return size * 0.9;
+    return size;
+  }
+
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final isMobile = screenWidth < 600;
-    final isTablet = screenWidth >= 600 && screenWidth < 1024;
+    final List<SalesData> chartData = [
+      SalesData('Business', 350),
+      SalesData('Personal', 250),
+    ];
 
-    double scale(double mobile, double tablet, double web) =>
-        isMobile ? mobile : isTablet ? tablet : web;
+    return Scaffold(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final isMobile = constraints.maxWidth < 600;
 
-    final padding = scale(8.0, 10.0, 12.0);
-    final titleFontSize = scale(14.0, 13.0, 14.0);
-    final labelFontSize = scale(12.0, 11.0, 12.0);
-
-    final barHeight = scale(18.0, 20.0, 22.0);
-    final values = [350.0, 220.0];
-    const maxValue = 400.0;
-
-    final numberTypes = ["Business", "Personal"];
-
-    final xAxisBottom = scale(20, 24, 28);
-    final yAxisLeft = scale(45, 75, 85);
-    final labelWidth = scale(55, 70, 90);
-
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(padding),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Title
-          Text(
-            "Number Type",
-            style: TextStyle(
-              fontSize: titleFontSize,
-              fontWeight: FontWeight.bold,
-              color: AppColors.textColors,
-            ),
-          ),
-          SizedBox(height: padding * 3),
-
-          Stack(
-            children: [
-              // Y-axis line
-              Positioned(
-                top: 0,
-                bottom: xAxisBottom,
-                left: yAxisLeft,
-                child: Container(
-                  width: 1,
-                  color: Colors.black,
-                ),
+          return Center(
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12),
               ),
 
-              // X-axis
-              Positioned(
-                left: yAxisLeft,
-                right: 0,
-                bottom: xAxisBottom,
-                child: Container(
-                  height: 1,
-                  color: Colors.black,
-                ),
-              ),
+              height: isMobile ? 280 : 330,
 
-              // Vertical "LEAD" text (shared for both bars)
-              Positioned(
-                top: 0,
-                bottom: xAxisBottom + scale(10, 12, 14),
-                left: yAxisLeft - scale(25, 30, 35), // thoda gap left se
-                child: RotatedBox(
-                  quarterTurns: 3,
-                  child: Text(
-                    "LEAD",
-                    style: TextStyle(
-                      fontSize: labelFontSize,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black87,
-                    ),
+              child: SfCartesianChart(
+                isTransposed: true,
+
+                title: ChartTitle(
+                  text: 'Number Type',
+                  alignment: ChartAlignment.near,
+                  textStyle: TextStyle(
+                    fontSize: scale(context, 16),
+                    fontWeight: FontWeight.w900,
+                    color: Colors.black,
                   ),
                 ),
-              ),
 
-              // Bars
-              Padding(
-                padding: EdgeInsets.only(
-                  left: 0,
-                  bottom: xAxisBottom + scale(10, 12, 14),
-                  right: scale(10, 12, 14),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: List.generate(numberTypes.length, (index) {
-                    final progress = values[index] / maxValue;
-
-                    return Padding(
-                      padding: EdgeInsets.only(bottom: scale(8, 10, 12)),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          // Y-axis label
-                          SizedBox(
-                            width: labelWidth,
-                            child: Text(
-                              numberTypes[index],
-                              style: TextStyle(
-                                fontSize: labelFontSize,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black87,
-                              ),
-                            ),
-                          ),
-                          SizedBox(width: scale(4, 6, 8)),
-
-                          // Bar
-                          Expanded(
-                            child: Align(
-                              alignment: Alignment.centerLeft,
-                              child: FractionallySizedBox(
-                                widthFactor: progress,
-                                child: Container(
-                                  height: barHeight,
-                                  decoration: BoxDecoration(
-                                    color: AppColors.primaryColor,
-                                    borderRadius: BorderRadius.circular(50),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }),
-                ),
-              ),
-            ],
-          ),
-
-          SizedBox(height: scale(8, 10, 12)),
-
-          // Counts
-          Padding(
-            padding: EdgeInsets.only(left: yAxisLeft - scale(15, 15, 15)),
-            child: Row(
-              children: List.generate(5, (i) {
-                final step = maxValue - (maxValue / 4) * i;
-                return Expanded(
-                  child: Container(
-                    alignment: Alignment.centerRight,
-                    padding: EdgeInsets.only(right: scale(4, 6, 8)),
-                    child: Text(
-                      step.toInt().toString(),
-                      style: TextStyle(
-                        fontSize: labelFontSize,
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold, // bold counts
-                      ),
+                primaryXAxis: CategoryAxis(
+                  title: AxisTitle(
+                    text: 'Lead',
+                    textStyle: TextStyle(
+                      fontSize: scale(context, 13),
+                      fontWeight: FontWeight.w900,
+                      color: Colors.black,
                     ),
                   ),
-                );
-              }),
+                  labelStyle: TextStyle(
+                    fontSize: scale(context, 12),
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                  axisLine: const AxisLine(color: Colors.black, width: 1),
+                ),
+
+                primaryYAxis: NumericAxis(
+                  title: AxisTitle(
+                    text: 'Count',
+                    textStyle: TextStyle(
+                      fontSize: scale(context, 13),
+                      fontWeight: FontWeight.w900,
+                      color: Colors.black,
+                    ),
+                  ),
+                  isInversed: false,
+                  minimum: 0,
+                  maximum: 400,
+                  interval: 100,
+
+
+                  labelStyle: TextStyle(
+                    fontSize: scale(context, 11),
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
+                  ),
+
+                  majorGridLines: const MajorGridLines(
+                    color: Color(0xFFE0E0E0),
+                    width: 0.7,
+                  ),
+                  axisLine: const AxisLine(color: Colors.black, width: 1),
+                ),
+
+                series: <ColumnSeries<SalesData, String>>[
+                  ColumnSeries<SalesData, String>(
+                    dataSource: chartData,
+                    xValueMapper: (SalesData data, _) => data.type,
+                    yValueMapper: (SalesData data, _) => data.sales,
+
+                    sortingOrder: SortingOrder.descending,
+
+                    width: isMobile ? 0.55 : 0.6,
+                    spacing: 0.3,
+                    color: Colors.blue,
+                    borderRadius: BorderRadius.circular(8),
+
+                    dataLabelSettings: DataLabelSettings(
+                      isVisible: false,
+                      ),
+                    ),
+                ],
+              ),
             ),
-          ),
-        ],
+          );
+        },
       ),
     );
   }
+}
+
+
+class SalesData {
+  final String type;
+  final int sales;
+  SalesData(this.type, this.sales);
 }
