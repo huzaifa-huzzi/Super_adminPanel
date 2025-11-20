@@ -33,6 +33,12 @@ class DashboardScreen extends StatelessWidget {
           ? tablet
           : web;
     }
+    double widgetHeight(double mobile, double tablet, double web) {
+      final width = MediaQuery.of(context).size.width;
+      if (width < 600) return mobile;
+      if (width < 1024) return tablet;
+      return web;
+    }
 
     final padding = scale(8, 10, 12);
     final spacing = scale(8, 10, 12);
@@ -58,6 +64,7 @@ class DashboardScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
                 /// ---------- TOP BAR ----------
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -187,62 +194,62 @@ class DashboardScreen extends StatelessWidget {
 
 
                 /// ---------- SECOND ROW ----------
-              if (isMobile || isTablet)
-                SingleChildScrollView(
-                  padding: EdgeInsets.all(sectionSpacing),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                if (isMobile || isTablet)
+                  SingleChildScrollView(
+                    padding: EdgeInsets.all(sectionSpacing),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
 
-                      /// Missing Data Chart
-                      SizedBox(
-                        height: 250,
-                        child: MissingDataChartWidget(),
-                      ),
-                      SizedBox(height: sectionSpacing),
-
-                      ///  States Pie Chart
-                      SizedBox(
-                        height: 250,
-                        child: StatesPieChartWidget(),
-                      ),
-                      SizedBox(height: sectionSpacing),
-
-                      ///  Weekly Leads Chart
-                      SizedBox(
-                        height: 380,
-                        child: WeeklyLeadsChart(
-                          padding: padding,
-                          spacing: spacing,
-                          controller: controller,
+                        /// Missing Data Chart
+                        SizedBox(
+                          height: widgetHeight(220, 250, 280),
+                          child: MissingDataChartWidget(),
                         ),
-                      ),
-                      SizedBox(height: sectionSpacing),
+                        SizedBox(height: sectionSpacing),
 
-                      ///  Keyword Category
-                      SizedBox(
-                        height: 450,
-                        child: KeywordCategoryWidget(),
-                      ),
-                      SizedBox(height: sectionSpacing),
+                        ///  States Pie Chart
+                        SizedBox(
+                          height: widgetHeight(220, 250, 280),
+                          child: StatesPieChartWidget(),
+                        ),
+                        SizedBox(height: sectionSpacing),
 
-                      ///  Leads By Employee
-                      SizedBox(
-                        height: 360,
-                        child: LeadsByEmployeeWidget(),
-                      ),
-                      SizedBox(height: sectionSpacing),
+                        ///  Weekly Leads Chart
+                        SizedBox(
+                          height: widgetHeight(300, 380, 420),
+                          child: WeeklyLeadsChart(
+                            padding: padding,
+                            spacing: spacing,
+                            controller: controller,
+                          ),
+                        ),
+                        SizedBox(height: sectionSpacing),
 
-                      ///  Number Types
-                      SizedBox(
-                        height: 260,
-                        child: NumberTypesWidget(),
-                      ),
-                    ],
-                  ),
-                )
+                        ///  Keyword Category
+                        SizedBox(
+                          height: widgetHeight(400, 450, 500),
+                          child: KeywordCategoryWidget(),
+                        ),
+                        SizedBox(height: sectionSpacing),
 
-              else
+                        ///  Leads By Employee
+                        SizedBox(
+                          height: widgetHeight(300, 360, 400),
+                          child: LeadsByEmployeeWidget(),
+                        ),
+                        SizedBox(height: sectionSpacing),
+
+                        ///  Number Types
+                        SizedBox(
+                          height: widgetHeight(220, 260, 300),
+                          child: NumberTypesWidget(),
+                        ),
+                      ],
+                    ),
+                  )
+
+                else
                   SingleChildScrollView(
                     padding: EdgeInsets.all(spacing),
                     child: Stack(
@@ -343,10 +350,12 @@ class DashboardScreen extends StatelessWidget {
 
     double padding = isMobile ? 8 : isTablet ? 10 : 12;
     double borderRadius = isMobile ? 8 : isTablet ? 10 : 12;
+
     double titleFontAdjusted =
-    isMobile ? titleFont * 0.85 : isTablet ? titleFont * 0.9 : titleFont;
+    isMobile ? titleFont * 1.0 : isTablet ? titleFont * 0.9 : titleFont;
     double valueFontAdjusted =
-    isMobile ? valueFont * 0.85 : isTablet ? valueFont * 0.9 : valueFont;
+    isMobile ? valueFont * 1.0 : isTablet ? valueFont * 0.9 : valueFont;
+
     double cardHeight = isMobile ? 80 : isTablet ? 100 : 120;
 
     return Container(

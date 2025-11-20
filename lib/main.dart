@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final router = GoRouter(
-      initialLocation: '/employee',
+      initialLocation: '/dashboard',
       routes: [
 
         /// SHELL
